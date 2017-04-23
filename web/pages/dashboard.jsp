@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 22/04/2017, 05:20:56 PM
+    Document   : dashboard
+    Created on : 23/04/2017, 01:01:12 AM
     Author     : andre
 --%>
 
@@ -12,8 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Sistema de Contabilidad</h1>
-        <p>Ingresar <a href="app.jsp">aqui</a> por favor</p>
-        <h2>by andiazher Inc</h2>
+        <h1>Hello World!</h1>
     </body>
 </html>
