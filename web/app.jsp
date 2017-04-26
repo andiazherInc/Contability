@@ -27,7 +27,7 @@
         function load(param){
             var idSession= param;
             if(idSession=="" || idSession =="null" || idSession==undefined){
-                $.post("pages/login.jsp", {}, function(data){
+                $.post("login.jsp", {}, function(data){
                     $("#contend").html(data);
                 });
             }

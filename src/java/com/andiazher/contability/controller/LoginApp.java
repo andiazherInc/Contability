@@ -7,6 +7,8 @@ package com.andiazher.contability.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,27 +33,32 @@ public class LoginApp extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            String user = request.getParameter("user");
-            String pass = request.getParameter("pass");
-            if(user.isEmpty() || pass.isEmpty()){
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Usuario o contraseña no pueden estas vacios");
-                }
-            }
-            else{
-                //CONSULT USER AND PASS IN BD
-                if(user.equals("admin") && pass.equals("nada")){
-                    System.out.println("The user "+user+" has login");
-                    request.getSession().setAttribute("isSession", "true");
-                    response.sendRedirect("app.jsp");
+            String param1 = request.getParameter("param");
+            if(param1.equals("login")){
+                String user = request.getParameter("user");
+                String pass = request.getParameter("pass");
+                if(user.isEmpty() || pass.isEmpty()){
+                    response.sendRedirect("login.jsp?error=Usuario o contraseña no pueden estas vacios");
                 }
                 else{
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println("Credenciales invalidas");
+                    //CONSULT USER AND PASS IN BD
+                    if(user.equals("admin") && pass.equals("nada")){
+                        Calendar fecha = new GregorianCalendar();
+                        String f= fecha.get(Calendar.YEAR) +"-"+(fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)
+                                +" "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE)+":"+fecha.get(Calendar.SECOND);
+                        System.out.println("The user "+user+" has login at "+ f);
+                        request.getSession().setAttribute("isSession", "true");
+                        response.sendRedirect("app.jsp");
+                    }
+                    else{
+                        response.sendRedirect("login.jsp?error=Credenciales+invalidas");
                     }
                 }
             }
-            
+            if(param1.equals("logout")){
+                request.getSession().setAttribute("isSession", "");
+                response.sendRedirect("login.jsp?logout=true");
+            }
         }
         catch(NullPointerException s){
             s.printStackTrace();

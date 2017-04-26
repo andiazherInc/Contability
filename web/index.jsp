@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Sistema de Contabilidad</h1>
-        <p>Ingresar <a href="app.jsp">aqui</a> por favor</p>
+        <p>Ingresar <a href="login.jsp">aqui</a> por favor</p>
         <h2>by andiazher Inc</h2>
     </body>
 </html>
