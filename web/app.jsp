@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="pages/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="pages/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="pages/js/jquery-3.2.1.js"></script>
@@ -21,7 +22,10 @@
     </head>
     <body>
         <div id="contend">
-            <h2>Loading application..</h2>
+            <div class="text-center">
+                <h2>Loading....</h2>
+                <img src="pages/images/loading_spinner.gif">
+            </div>
         </div>
     <script>
         function load(param){

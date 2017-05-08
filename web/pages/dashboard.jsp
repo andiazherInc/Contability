@@ -79,6 +79,47 @@
                 </div>
               </nav>
         </div>
+        <div class="col-sm-2 panel panel-default">
+            <div class="panel-body">
+                <li><a href="" >Menu Hello as google nav</a></li>
+               <li></li>
+               <li>Menu1</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu1</li> 
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+               <li>Menu Hello as google nav</li>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>Title</b>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Includes over 250 glyphs in font format from the Glyphicon 
+                        Halflings set. Glyphicons Halflings are normally not available 
+                        for free, but their creator has made them available for Bootstrap 
+                        free of cost. As a thank you, we only ask that you 
+                        include a link back to Glyphicons whenever possible.
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    Hello
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <p class="text-right">All rigths reservate</p>
+        </div>
     </body>
     <script>
         function logout() {

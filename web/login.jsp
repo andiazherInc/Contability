@@ -25,6 +25,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="pages/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="pages/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="pages/js/jquery-3.2.1.js"></script>
@@ -37,7 +38,7 @@
     <body>
         <div class="">
             <nav class="navbar navbar-default navbar-static-top">
-                <h3 class="col-md-offset-1 col-sm-offset-2">Sistema de Contabilidad <small>by andiazher Inc</small></h3>
+                <h3 class="col-md-offset-1 col-sm-offset-2"> Sistema de Contabilidad</h3>
             </nav>
         </div>
         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
@@ -63,6 +64,9 @@
                     </form>
                 </div>
               </div>
+        </div>
+        <div class="col-md-12 col-sm-12 text-center">
+            <h4 class=""><small>by andiazher Inc</small></h4>
         </div>
     </body>
 </html>
