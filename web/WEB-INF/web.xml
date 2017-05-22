@@ -4,9 +4,17 @@
         <servlet-name>LoginApp</servlet-name>
         <servlet-class>com.andiazher.contability.controller.LoginApp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginParamters</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.LoginParamters</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginParamters</servlet-name>
+        <url-pattern>/loginParamters</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

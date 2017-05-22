@@ -10,8 +10,6 @@ import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author andre
  */
-public class LoginApp extends HttpServlet {
+public class LoginParamters extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +36,39 @@ public class LoginApp extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            String param1 = request.getParameter("param");
-            if(param1.equals("login")){
-                String user = request.getParameter("user");
-                String pass = request.getParameter("pass");
-                if(user.isEmpty() || pass.isEmpty()){
-                    response.sendRedirect("login.jsp?error=Usuario o contraseña no pueden estas vacios");
-                }
-                else{
-                    //CONSULT USER AND PASS IN BD
-                    Entitie login =new Entitie(App.TABLE_LOGIN);
-                    try{
-                        login = login.getEntitieParam("usuario", user).get(0);
-                        if(user.equals(login.getDataOfLabel("usuario")) && pass.equals(login.getDataOfLabel("pass"))){
-                            Calendar fecha = new GregorianCalendar();
-                            String f= fecha.get(Calendar.YEAR) +"-"+(fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)
-                                    +" "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE)+":"+fecha.get(Calendar.SECOND);
-                            System.out.println("The user "+user+" has login at "+ f);
-                            request.getSession().setAttribute("isSession", "true");
-                            request.getSession().setAttribute("user", user);
-                            response.sendRedirect("app.jsp");
+            if(request.getSession().getAttribute("isSession").equals("true")){
+                String username="";
+                try{
+                    username= request.getParameter("user");
+                    Entitie login = new Entitie(App.TABLE_LOGIN);
+                    login= login.getEntitieParam("usuario", username).get(0);
+                    Entitie user = new Entitie(App.TABLE_USERS);
+                    user = user.getEntitieParam("user", login.getId()).get(0);
+                    try (PrintWriter out = response.getWriter()) {
+                        if(user.getDataOfLabel("name").equals("") && user.getDataOfLabel("lastname").equals("") && 
+                                user.getDataOfLabel("name").equals(" ") && user.getDataOfLabel("lastname").equals(" ")){
+                            out.println("0");
                         }
                         else{
-                            response.sendRedirect("login.jsp?error=Credenciales+invalidas");
+                            out.println(user.getDataOfLabel("name")+" "+user.getDataOfLabel("lastname"));
                         }
-                    }catch(IndexOutOfBoundsException s){
-                        response.sendRedirect("login.jsp?error=Credenciales+invalidas");
-                    }   
+                    } 
+                }catch(NullPointerException | IndexOutOfBoundsException e){
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println("0");
+                    }                     
                 }
+                
+                
+                
             }
-            if(param1.equals("logout")){
-                request.getSession().setAttribute("isSession", "");
-                response.sendRedirect("login.jsp?logout=true");
+            else{
+                response.sendRedirect("login.jsp?error=Credenciales+invalidas");
             }
+        }catch(NullPointerException s){
+            response.sendRedirect("login.jsp?error=Credenciales+invalidas");
         }
-        catch(NullPointerException s){
-            s.printStackTrace();
-        }
+        
         
     }
 
@@ -92,7 +86,7 @@ public class LoginApp extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(LoginApp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginParamters.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

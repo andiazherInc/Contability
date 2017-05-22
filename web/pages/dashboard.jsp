@@ -6,12 +6,25 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String q="";
+    String q2="";
+    String user="";
     try{      
         if(!session.getAttribute("isSession").equals("true")){
             response.sendRedirect("../login.jsp");
         }
+        else{
+            user = session.getAttribute("user").toString();
+        }
     }
     catch(NullPointerException s){
+    }
+    try{
+        if(!request.getParameter("q").equals("null")){
+            q = request.getParameter("q");
+            q2 = "?q="+request.getParameter("q");
+        }
+    }catch(NullPointerException s){
     }
 %>
 <!DOCTYPE html>
@@ -20,7 +33,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dashboard</title>
     </head>
-    <body>
+    <body >
+        <div class="">
         <div id="navbar">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -32,7 +46,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#reload">SCP</a>
+                      <a class="navbar-brand" href="#reload" onclick="reloadAll()">SCP</a>
                   </div>
 
                   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,7 +70,7 @@
                       <form class="navbar-form navbar-left" action="#search" method="get">
                       <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for..." name="q">
+                            <input type="text" class="form-control" placeholder="Search for..." name="q" value="<%=q%>">
                             <span class="input-group-btn">
                               <button class="btn btn-default" type="submit">Go!</button>
                             </span>
@@ -66,7 +80,7 @@
                     <ul class="nav navbar-nav navbar-right">
                       <!--<li><a href="#"></a></li> -->
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Username<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="username"><%=user%><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="#profile">Profile</a></li>
                           <li><a href="#editProfile">Edit Profile</a></li>
@@ -98,7 +112,7 @@
                <li>Menu Hello as google nav</li>
             </div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10" >
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <b>Title</b>
@@ -117,8 +131,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="background: burlywood;">
             <p class="text-right">All rigths reservate</p>
+        </div>
         </div>
     </body>
     <script>
@@ -128,6 +143,21 @@
                 $("#contend").html(data);
             });
         }
+        function reloadAll(){
+            var q="<%=q2%>";
+            $.post("pages/dashboard.jsp"+q, {}, function(data){
+                $("#contend").html(data);
+            });
+        }
+        function laodName(){
+            var username= "<%=user%>";
+            $.post("loginParamters", {user: username}, function(data){
+                if(data!=0){
+                    $("#username").html(data +"<span class=\"caret\">");
+                }
+            });
+        }
+        laodName();
     </script>
 
 </html>

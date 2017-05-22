@@ -5,11 +5,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String q="";
+    try{
+        if(!request.getParameter("q").equals("null")){
+            q = "?q="+request.getParameter("q");
+        }
+    }catch(NullPointerException s){}
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="icon" type="image/png" href="pages/images/favicon.ico" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+        
         <link rel="stylesheet" href="pages/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="pages/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="pages/js/jquery-3.2.1.js"></script>
@@ -36,7 +49,8 @@
                 });
             }
             else{
-                $.post("pages/dashboard.jsp", {}, function(data){
+                var q= "<%=q%>";
+                $.post("pages/dashboard.jsp"+q, {}, function(data){
                     $("#contend").html(data);
                 });
             }

@@ -21,7 +21,7 @@ public class ConnectionMysql {
     private Connection connection;
     private String host ="localhost";
     private String port ="3306";
-    private String db ="concesionario";
+    private String db ="contabilidad";
     private String user ="root";
     private String pass ="root";
     private String informationSchema="information_schema";

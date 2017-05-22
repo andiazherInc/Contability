@@ -18,6 +18,10 @@ public class App {
     public final static String versionCompilation="V1.03";
     private static ConnectionMysql connectionMysql = new ConnectionMysql();
     
+    //TABLES
+    public static String TABLE_LOGIN = "login";
+    public static String TABLE_USERS = "usuarios";
+    
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){
             connectionMysql.conectar();
