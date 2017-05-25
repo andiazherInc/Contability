@@ -18,6 +18,7 @@
         }
     }
     catch(NullPointerException s){
+        response.sendRedirect("../login.jsp");
     }
     try{
         if(!request.getParameter("q").equals("null")){
@@ -132,7 +133,7 @@
             </div>
         </div>
         <div class="col-sm-12" style="background: burlywood;">
-            <p class="text-right">All rigths reservate</p>
+            <p class="text-right" id="copyright">by andiazher Inc &copy; </p>
         </div>
         </div>
     </body>
@@ -158,6 +159,11 @@
             });
         }
         laodName();
+        function loadCopyri(){
+            var date = new Date().getFullYear();
+            $("#copyright").html("by andiazher Inc &copy; "+date);
+        }
+        loadCopyri();
     </script>
 
 </html>
