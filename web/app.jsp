@@ -29,7 +29,8 @@
         <script src="pages/js/jquery-ui.js"></script>
         <!--<script src="pages/js/jquery.mobile.custom.js"></script> -->
         <script src="pages/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
+        <link rel="stylesheet" href="pages/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
         <title>SCP | andiazher Inc</title>
         
     </head>

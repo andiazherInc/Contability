@@ -72,4 +72,13 @@
             <h4 class=""><small>by andiazher Inc</small></h4>
         </div>
     </body>
+    <style>
+        body {
+            background: white;
+        }
+        .navbar{
+            background: white;
+        }
+        
+    </style>
 </html>

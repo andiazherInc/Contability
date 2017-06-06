@@ -47,8 +47,8 @@ public class LoginApp extends HttpServlet {
                 }
                 else{
                     //CONSULT USER AND PASS IN BD
-                    Entitie login =new Entitie(App.TABLE_LOGIN);
                     try{
+                        Entitie login =new Entitie(App.TABLE_LOGIN);
                         login = login.getEntitieParam("usuario", user).get(0);
                         if(user.equals(login.getDataOfLabel("usuario")) && pass.equals(login.getDataOfLabel("pass"))){
                             Calendar fecha = new GregorianCalendar();
@@ -64,7 +64,9 @@ public class LoginApp extends HttpServlet {
                         }
                     }catch(IndexOutOfBoundsException s){
                         response.sendRedirect("login.jsp?error=Credenciales+invalidas");
-                    }   
+                    }catch(NullPointerException s){
+                        response.sendRedirect("login.jsp?error=Sorry: Has ocurred a error: "+s.toString());
+                    }
                 }
             }
             if(param1.equals("logout")){
