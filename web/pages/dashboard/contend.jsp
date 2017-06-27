@@ -31,14 +31,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>CONTEND - THIS CONTEN IS NO UPDATE</title>
     </head>
     <body>
-        <div class="panel panel-default contenido">
-                <div class="panel-heading">
-                    <b>Title</b>
+        <div class="panel panel-default contenido" > <!--style="background: transparent;"-->
+                <div class="panel-heading"> <!--background-color: black; opacity: 0.9; color: white;-->
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> This is a Example of title
                 </div>
-                <div class="panel-body">
+                <div class="panel-body " > <!--style="background-color: black; opacity: 0.8; color: white;"-->
                     <p>
                         Includes over 250 glyphs in font format from the Glyphicon 
                         Halflings set. Glyphicons Halflings are normally not available 
@@ -46,10 +46,39 @@
                         free of cost. As a thank you, we only ask that you 
                         include a link back to Glyphicons whenever possible.
                     </p>
+                     <p>
+                        Includes over 250 glyphs in font format from the Glyphicon 
+                        Halflings set. Glyphicons Halflings are normally not available 
+                        for free, but their creator has made them available for Bootstrap 
+                        free of cost. As a thank you, we only ask that you 
+                        include a link back to Glyphicons whenever possible.
+                    </p>
+                     <p>
+                        Includes over 250 glyphs in font format from the Glyphicon 
+                        Halflings set. Glyphicons Halflings are normally not available 
+                        for free, but their creator has made them available for Bootstrap 
+                        free of cost. As a thank you, we only ask that you 
+                        include a link back to Glyphicons whenever possible.
+                    </p>
+                     <p>
+                        Includes over 250 glyphs in font format from the Glyphicon 
+                        Halflings set. Glyphicons Halflings are normally not available 
+                        for free, but their creator has made them available for Bootstrap 
+                        free of cost. As a thank you, we only ask that you 
+                        include a link back to Glyphicons whenever possible.
+                    </p>
+                     <p>
+                        Includes over 250 glyphs in font format from the Glyphicon 
+                        Halflings set. Glyphicons Halflings are normally not available 
+                        for free, but their creator has made them available for Bootstrap 
+                        free of cost. As a thank you, we only ask that you 
+                        include a link back to Glyphicons whenever possible.
+                    </p>
+                    
                 </div>
                 <div class="panel-footer">
-                    Hello
+                    
                 </div>
-            </div>
+        </div>
     </body>
 </html>

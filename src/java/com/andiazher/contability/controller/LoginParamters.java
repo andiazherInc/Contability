@@ -58,9 +58,6 @@ public class LoginParamters extends HttpServlet {
                         out.println("0");
                     }                     
                 }
-                
-                
-                
             }
             else{
                 response.sendRedirect("login.jsp?error=Credenciales+invalidas");

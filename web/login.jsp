@@ -40,7 +40,7 @@
     </head>
     <body>
         <div class="">
-            <nav class="navbar navbar-default navbar-static-top">
+            <nav class="navbar navbar-primary navbar-static-top" style="background: transparent; color: white; text-shadow: 2px 2px 1px black;">
                 <h3 class="col-md-offset-1 col-sm-offset-2"> Sistema de Contabilidad</h3>
             </nav>
         </div>
@@ -68,17 +68,26 @@
                 </div>
               </div>
         </div>
-        <div class="col-md-12 col-sm-12 text-center">
-            <h4 class=""><small>by andiazher Inc</small></h4>
+        <div class="col-md-12 col-sm-12 text-center" style="text-shadow: 2px 2px 2px black; color: white;">
+            <p class="" style="color: white;">by andiazher Inc</p>
         </div>
     </body>
     <style>
         body {
-            background: white;
+            width:100%;
+            height:100%;
+            background: url("pages/images/font3.jpg") no-repeat center center fixed;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+           -moz-background-size: cover;
+           -webkit-background-size: cover;
+           -o-background-size: cover;
         }
         .navbar{
             background: white;
         }
+
         
     </style>
 </html>

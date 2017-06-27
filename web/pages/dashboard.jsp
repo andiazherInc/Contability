@@ -39,7 +39,7 @@
         <div id="navbar">
             
         </div>
-        <div class="col-sm-2" id="menu">
+        <div class="col-sm-2 no-print" id="menu"> <!--hidden-xs-->
             
         </div>
         <div class="col-sm-10" id="contenido">
@@ -79,9 +79,30 @@
     </script>
     <style>
         body {
-            background-image: url("pages/images/font1.jpg");
+            width:100%;
+            height:100%;
+            background: url("pages/images/font3.jpg") no-repeat center center fixed;
+            background-color: white;
             background-repeat: no-repeat;
+            background-size: cover;
+           -moz-background-size: cover;
+           -webkit-background-size: cover;
+           -o-background-size: cover;
         }
-        
+        @media print
+        {
+            .no-print
+            {
+                display: none !important;
+                height: 0;
+            }
+
+
+            .no-print, .no-print *{
+                display: none !important;
+                height: 0;
+            }
+        }
+       
     </style>
 </html>
