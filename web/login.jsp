@@ -44,7 +44,7 @@
                 <h3 class="col-md-offset-1 col-sm-offset-2"> Sistema de Contabilidad</h3>
             </nav>
         </div>
-        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-5 col-md-offset-4 col-sm-offset-3 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h1 class="panel-title text-center">Login</h1>
@@ -68,7 +68,7 @@
                 </div>
               </div>
         </div>
-        <div class="col-md-12 col-sm-12 text-center" style="text-shadow: 2px 2px 2px black; color: white;">
+        <div class="col-md-12 col-sm-12 text-right" style="text-shadow: 2px 2px 2px black; color: white;">
             <p class="" style="color: white;">by andiazher Inc</p>
         </div>
     </body>
