@@ -82,7 +82,7 @@
             width:100%;
             height:100%;
             background: url("pages/images/font3.jpg") no-repeat center center fixed;
-            background-color: white;
+            background-color: green;
             background-repeat: no-repeat;
             background-size: cover;
            -moz-background-size: cover;

@@ -10,21 +10,26 @@ import com.andiazher.contability.app.App;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.json.JsonObject;
 
 /**
  *
  * @author andre
  */
-public class Entitie {
+public final class Entitie{
     
     private String name;
     private String id;
     private ArrayList<String> colums;
-    private ArrayList<String> data;
+    private ArrayList<String> data1;
+    private Map<String,String> data;
 
     public Entitie() {
         colums= new ArrayList<>();
-        data = new ArrayList<>();
+        data1 = new ArrayList<>();
+        data= new HashMap<>();
         name= "PROTOTIPE";
         id="0";
     }
@@ -32,9 +37,11 @@ public class Entitie {
     
     public Entitie(String name)  {
         setColums(new ArrayList<>());
+        setData1(new ArrayList<>());
+        setData(new HashMap<>());
         setName(name);
         setId("0");
-        setData(new ArrayList<>());
+        
         String sql = "";
         sql+="SELECT COLUMN_NAME FROM "+App.getConnectionMysql().getInformationSchema()+".columns "
                 + "where table_schema ='"+App.getConnectionMysql().getDb()+"' and table_name='"+name+"'";
@@ -44,6 +51,7 @@ public class Entitie {
                 String request = resultSet.getString("COLUMN_NAME");
                 if(!request.equals("ID")){
                     colums.add(request);
+                    data.put(request, "");
                 }
             }
         }
@@ -81,13 +89,24 @@ public class Entitie {
         this.colums = colums;
     }
 
-    public ArrayList<String> getData() {
+    public ArrayList<String> getData1() {
+        return data1;
+    }
+
+    public void setData1(ArrayList<String> data) {
+        this.data1 = data;
+    }
+
+    public Map<String, String> getData() {
         return data;
     }
 
-    public void setData(ArrayList<String> data) {
+    public void setData(Map<String, String> data) {
         this.data = data;
     }
+    
+    
+    
     /**
      * 
      * @return verdadero si la operacion es un exito.
@@ -99,11 +118,11 @@ public class Entitie {
         for(int i=0; i<colums.size();i++){
             if(i!=colums.size()-1){
                 columnas+=colums.get(i)+", ";
-                datos+="'"+data.get(i)+"', ";
+                datos+="'"+data1.get(i)+"', ";
             }
             else{
                 columnas+=colums.get(i)+"";
-                datos+="'"+data.get(i)+"'";
+                datos+="'"+data1.get(i)+"'";
             }
         }
         sql+="insert into "+App.getConnectionMysql().getDb()+"."+name+" ("+columnas+")  values ("+datos+");";
@@ -119,10 +138,10 @@ public class Entitie {
         String datos="";
         for(int i=0; i<colums.size();i++){
             if(i!=colums.size()-1){
-                datos+=colums.get(i)+"='"+data.get(i)+"', ";
+                datos+=colums.get(i)+"='"+data1.get(i)+"', ";
             }
             else{
-                datos+=colums.get(i)+"='"+data.get(i)+"'";
+                datos+=colums.get(i)+"='"+data1.get(i)+"'";
             }
         }
         sql+="update "+App.getConnectionMysql().getDb()+"."+name+" set "+datos+" where ID = "+id;
@@ -149,10 +168,10 @@ public class Entitie {
         sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name +" where ID="+id ;
         ResultSet query= App.consult(sql);
         setId(id);
-        setData(new ArrayList<>());
+        setData1(new ArrayList<>());
         while(query.next()){
             for(int i=0; i<colums.size();i++){
-                this.getData().add(query.getString(colums.get(i)));
+                this.getData1().add(query.getString(colums.get(i)));
             }
         }
     }
@@ -182,7 +201,7 @@ public class Entitie {
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
             for(int i=0; i<colums.size();i++){
-                entitie.getData().add(query.getString(colums.get(i)));
+                entitie.getData1().add(query.getString(colums.get(i)));
             }
             entities.add(entitie);
         }
@@ -214,7 +233,7 @@ public class Entitie {
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
             for(int i=0; i<colums.size();i++){
-                entitie.getData().add(query.getString(colums.get(i)));
+                entitie.getData1().add(query.getString(colums.get(i)));
             }
             entities.add(entitie);
         }
@@ -259,7 +278,7 @@ public class Entitie {
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
             for(int i=0; i<colums.size();i++){
-                entitie.getData().add(query.getString(colums.get(i)));
+                entitie.getData1().add(query.getString(colums.get(i)));
             }
             entities.add(entitie);
         }
@@ -284,7 +303,7 @@ public class Entitie {
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString("ID"));
             for(int i=0; i<colums.size();i++){
-                entitie.getData().add(query.getString(colums.get(i)));
+                entitie.getData1().add(query.getString(colums.get(i)));
             }
             entities.add(entitie);
         }
@@ -305,7 +324,7 @@ public class Entitie {
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString("ID"));
             for(int i=0; i<colums.size();i++){
-                entitie.getData().add(query.getString(colums.get(i)));
+                entitie.getData1().add(query.getString(colums.get(i)));
             }
             entities.add(entitie);
         }
@@ -319,7 +338,7 @@ public class Entitie {
     
     @Override
     public String toString() {
-        return "Entitie{" + "name=" + name + ", id=" + id + ", colums=" + colums + ", data=" + data + '}';
+        return "Entitie{" + "name=" + name + ", id=" + id + ", colums=" + colums + ", data=" + data1 + '}';
     }
     
     /**
@@ -330,7 +349,7 @@ public class Entitie {
     public String getDataOfLabel(String param){
         for(int i=0; i<colums.size(); i++){
             if(colums.get(i).equals(param)){
-                return data.get(i);
+                return data1.get(i);
             }
         }
         return null;
