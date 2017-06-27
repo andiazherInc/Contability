@@ -19,11 +19,11 @@ import java.sql.Statement;
 public class ConnectionMysql {
     
     private Connection connection;
-    private String host ="localhost";
+    private String host ="130.200.232.243";
     private String port ="3306";
     private String db ="contabilidad";
     private String user ="root";
-    private String pass ="";
+    private String pass ="root";
     private String informationSchema="information_schema";
 
     public Connection getConnection() {
