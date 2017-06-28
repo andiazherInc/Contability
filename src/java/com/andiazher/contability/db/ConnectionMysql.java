@@ -27,6 +27,7 @@ public class ConnectionMysql {
     private String informationSchema="information_schema";
 
     public Connection getConnection() {
+        
         return connection;
     }
 

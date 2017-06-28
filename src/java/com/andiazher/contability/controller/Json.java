@@ -51,7 +51,7 @@ public class Json {
         j.add("name", "Andres Diaz");
         j.add("edad", "22");
         Json k= new Json();
-        k.add("name1", "Katerin");
+        k.add("name1", "Lucy");
         k.add("edad", "21");
         k.add("novio", "Andres");
         Json l= new Json();
@@ -59,7 +59,7 @@ public class Json {
         k.add("otros", l);
         
         j.add("novia", k);
-        j.add("sexo", "gay");
+        j.add("sexo", "Mas");
         j.add("novia2", k);
         
         System.out.println(j);
