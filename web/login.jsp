@@ -44,46 +44,36 @@
                 <h3 class="col-md-offset-1 col-sm-offset-2"> Sistema de Contabilidad</h3>
             </nav>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-5 col-md-offset-4 col-sm-offset-3 ">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h1 class="panel-title text-center">Login</h1>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-8 col-md-offset-7 col-sm-offset-5 ">
+            <div class="panel " style="background: transparent;">
+                <div class="panel-headingt text-center" style="text-shadow: 2px 2px 2px black; color: white;">
+                    <b>Your Account</b>
                 </div>
                 <div class="panel-body">
                     <p class="text-center text-danger" id="error"><%=name%></p>
                     <form action="loginApp#login=true&key=<%=session.getId()%>" id="loginForm" method="post">
                         <input type="hidden" value="login" name="param">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
+                            <!--<label for="exampleInputEmail1">Username</label>-->
                             <input type="text" class="form-control" id="exampleInputEmail1"  name="user" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
+                            <!--<label for="exampleInputPassword1">Password</label>-->
                             <input type="password" class="form-control" id="exampleInputPassword1" name="pass" placeholder="Password" required>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success btn-block" onclick="validate()">Access</button>
+                            <button type="submit" class="btn  btn-block" onclick="validate()">Access</button>
                         </div>
                     </form>
                 </div>
-              </div>
+            </div>
+            <div class="text-center" style="text-shadow: 2px 2px 2px black; color: white;">
+                <p class="" style="color: white;">by andiazher Inc</p>
+            </div>
         </div>
-        <div class="col-md-12 col-sm-12 text-right" style="text-shadow: 2px 2px 2px black; color: white;">
-            <p class="" style="color: white;">by andiazher Inc</p>
-        </div>
+        
     </body>
     <style>
-        body {
-            width:100%;
-            height:100%;
-            background: url("pages/images/font3.jpg") no-repeat center center fixed;
-            background-color: white;
-            background-repeat: no-repeat;
-            background-size: cover;
-           -moz-background-size: cover;
-           -webkit-background-size: cover;
-           -o-background-size: cover;
-        }
         .navbar{
             background: white;
         }

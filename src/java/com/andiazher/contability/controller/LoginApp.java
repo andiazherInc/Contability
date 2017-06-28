@@ -8,7 +8,6 @@ package com.andiazher.contability.controller;
 import com.andiazher.contability.app.App;
 import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -63,7 +62,7 @@ public class LoginApp extends HttpServlet {
                             response.sendRedirect("login.jsp?error=Credenciales+invalidas");
                         }
                     }catch(IndexOutOfBoundsException s){
-                        response.sendRedirect("login.jsp?error=Credenciales+invalidas");
+                        response.sendRedirect("login.jsp?error=Credenciales+invalidas; Error:"+s.getMessage());
                     }catch(NullPointerException s){
                         response.sendRedirect("login.jsp?error=Sorry: Has ocurred a error: "+s.toString());
                     }

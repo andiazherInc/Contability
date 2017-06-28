@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class Json {
     
-    Map<Object, Object> object;
+    Map<String, Object> object;
 
     public Json() {
         object= new HashMap<>();
@@ -33,7 +33,7 @@ public class Json {
     public String toString() {
         String s = "";
         String k = "";
-        for(Map.Entry<Object, Object> j: object.entrySet()){
+        for(Map.Entry<String, Object> j: object.entrySet()){
             s+=k;
             if(j.getValue().getClass().equals(Json.class)){
                 s+="{ \""+j.getKey()+"\""+" : \n    "+"  "+j.getValue()+"  } ";

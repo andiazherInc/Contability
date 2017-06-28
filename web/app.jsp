@@ -59,4 +59,32 @@
         load(<%=session.getAttribute("isSession")%>);
     </script>
     </body>
+    <style>
+        body {
+            width:100%;
+            height:100%;
+            background: url("pages/images/font3.jpg") no-repeat center center fixed;
+            background-color: #2F2D2D;
+            background-repeat: no-repeat;
+            background-size: cover;
+           -moz-background-size: cover;
+           -webkit-background-size: cover;
+           -o-background-size: cover;
+        }
+        @media print
+        {
+            .no-print
+            {
+                display: none !important;
+                height: 0;
+            }
+
+
+            .no-print, .no-print *{
+                display: none !important;
+                height: 0;
+            }
+        }
+       
+    </style>
 </html>

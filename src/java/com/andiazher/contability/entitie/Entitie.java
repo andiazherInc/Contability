@@ -7,6 +7,7 @@ package com.andiazher.contability.entitie;
 
 
 import com.andiazher.contability.app.App;
+import com.andiazher.contability.controller.Json;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,26 +23,22 @@ public final class Entitie{
     
     private String name;
     private String id;
-    private ArrayList<String> colums;
-    private ArrayList<String> data1;
-    private Map<String,String> data;
+    private Map<String, Object > data;
+    private Json json;
 
     public Entitie() {
-        colums= new ArrayList<>();
-        data1 = new ArrayList<>();
-        data= new HashMap<>();
-        name= "PROTOTIPE";
-        id="0";
+        setData(new HashMap<>());
+        setName("PROTOTIPE");
+        setId("0");
+        setJson( new Json() );
     }
     
     
     public Entitie(String name)  {
-        setColums(new ArrayList<>());
-        setData1(new ArrayList<>());
         setData(new HashMap<>());
         setName(name);
         setId("0");
-        
+        setJson( new Json() );
         String sql = "";
         sql+="SELECT COLUMN_NAME FROM "+App.getConnectionMysql().getInformationSchema()+".columns "
                 + "where table_schema ='"+App.getConnectionMysql().getDb()+"' and table_name='"+name+"'";
@@ -50,7 +47,6 @@ public final class Entitie{
             while(resultSet.next()){
                 String request = resultSet.getString("COLUMN_NAME");
                 if(!request.equals("ID")){
-                    colums.add(request);
                     data.put(request, "");
                 }
             }
@@ -81,27 +77,40 @@ public final class Entitie{
         this.name = name;
     }
 
+    public Json getJson() {
+        return json;
+    }
+
+    public void setJson(Json json) {
+        this.json = json;
+    }
+    
+    
+
     public ArrayList<String> getColums() {
+        ArrayList<String> colums = new ArrayList<>();
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            colums.add(j.getKey());
+        }
         return colums;
     }
 
-    public void setColums(ArrayList<String> colums) {
-        this.colums = colums;
+    
+    public ArrayList<String> getData() {
+        ArrayList<String> datos = new ArrayList<>();
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            datos.add(j.getKey());
+        }
+        return datos;
     }
 
-    public ArrayList<String> getData1() {
-        return data1;
-    }
+    
 
-    public void setData1(ArrayList<String> data) {
-        this.data1 = data;
-    }
-
-    public Map<String, String> getData() {
+    public Map<String, Object> getDataMap() {
         return data;
     }
 
-    public void setData(Map<String, String> data) {
+    public void setData(Map<String, Object> data) {
         this.data = data;
     }
     
@@ -115,15 +124,11 @@ public final class Entitie{
     public boolean create() throws SQLException{
         String sql = "";
         String columnas="",datos="";
-        for(int i=0; i<colums.size();i++){
-            if(i!=colums.size()-1){
-                columnas+=colums.get(i)+", ";
-                datos+="'"+data1.get(i)+"', ";
-            }
-            else{
-                columnas+=colums.get(i)+"";
-                datos+="'"+data1.get(i)+"'";
-            }
+        String k = "";
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            columnas+= k + j.getKey()+"";
+            datos+= k + "'"+j.getValue()+"'";
+            k = ",";
         }
         sql+="insert into "+App.getConnectionMysql().getDb()+"."+name+" ("+columnas+")  values ("+datos+");";
         return App.update(sql);
@@ -136,13 +141,10 @@ public final class Entitie{
     public boolean update() throws SQLException{
         String sql = "";
         String datos="";
-        for(int i=0; i<colums.size();i++){
-            if(i!=colums.size()-1){
-                datos+=colums.get(i)+"='"+data1.get(i)+"', ";
-            }
-            else{
-                datos+=colums.get(i)+"='"+data1.get(i)+"'";
-            }
+        String k = "";
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            datos+= k +" "+ j.getKey()+"='"+j.getValue()+"'";
+            k = ",";
         }
         sql+="update "+App.getConnectionMysql().getDb()+"."+name+" set "+datos+" where ID = "+id;
         return App.update(sql);
@@ -168,10 +170,9 @@ public final class Entitie{
         sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name +" where ID="+id ;
         ResultSet query= App.consult(sql);
         setId(id);
-        setData1(new ArrayList<>());
         while(query.next()){
-            for(int i=0; i<colums.size();i++){
-                this.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                data.put( j.getKey(), query.getString( j.getKey() ));
             }
         }
     }
@@ -200,8 +201,8 @@ public final class Entitie{
         while(query.next()){
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
-            for(int i=0; i<colums.size();i++){
-                entitie.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
             entities.add(entitie);
         }
@@ -232,8 +233,8 @@ public final class Entitie{
         while(query.next()){
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
-            for(int i=0; i<colums.size();i++){
-                entitie.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
             entities.add(entitie);
         }
@@ -250,13 +251,10 @@ public final class Entitie{
      */
     public ArrayList<Entitie> getEntitieParams(ArrayList<String> param, ArrayList<String> param2, ArrayList<String> opera, String sqlq, String Otables ) throws SQLException{
         String sql = "SELECT "+name+".ID, ";
-        for(int i=0; i<colums.size();i++){
-            if(i==colums.size()-1){
-                sql+= name+"."+colums.get(i);
-            }
-            else{
-                sql+= name+"."+colums.get(i)+", ";
-            }
+        String k = "";
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            sql+= k + " " + name + "." + j.getKey();
+            k = ",";
         }
         String params = "";
         for(int i=0; i<param.size();i++){
@@ -277,8 +275,8 @@ public final class Entitie{
         while(query.next()){
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString(name+".ID"));
-            for(int i=0; i<colums.size();i++){
-                entitie.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
             entities.add(entitie);
         }
@@ -302,8 +300,8 @@ public final class Entitie{
         while(query.next()){
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString("ID"));
-            for(int i=0; i<colums.size();i++){
-                entitie.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
             entities.add(entitie);
         }
@@ -323,8 +321,8 @@ public final class Entitie{
         while(query.next()){
             Entitie entitie = new Entitie(name);
             entitie.setId(query.getString("ID"));
-            for(int i=0; i<colums.size();i++){
-                entitie.getData1().add(query.getString(colums.get(i)));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
             entities.add(entitie);
         }
@@ -338,7 +336,7 @@ public final class Entitie{
     
     @Override
     public String toString() {
-        return "Entitie{" + "name=" + name + ", id=" + id + ", colums=" + colums + ", data=" + data1 + '}';
+        return "Entitie{" + "name=" + name + ", id=" + id + ", colums=" + getColums() + ", data=" + getData() + '}';
     }
     
     /**
@@ -346,10 +344,10 @@ public final class Entitie{
      * @param param
      * @return DATO DE ACUERDO A LA COLUMANA INGRESADA EN @param
      */
-    public String getDataOfLabel(String param){
-        for(int i=0; i<colums.size(); i++){
-            if(colums.get(i).equals(param)){
-                return data1.get(i);
+    public Object getDataOfLabel(String param){
+        for(Map.Entry<String, Object> j: data.entrySet()){
+            if(j.getKey().equals(param)){
+                return j.getValue();
             }
         }
         return null;
