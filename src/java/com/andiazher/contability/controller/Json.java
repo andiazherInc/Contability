@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class Json {
     
-    Map<String, Object> object;
+    private Map<String, Object> object;
 
     public Json() {
         object= new HashMap<>();
@@ -29,20 +29,31 @@ public class Json {
         object.put(key, value);
     }
 
+    public Map<String, Object> getObject() {
+        return object;
+    }
+
+    public void setObject(Map<String, Object> object) {
+        this.object = object;
+    }
+    
+    
+    
     @Override
     public String toString() {
-        String s = "";
+        String s = "{";
         String k = "";
         for(Map.Entry<String, Object> j: object.entrySet()){
             s+=k;
             if(j.getValue().getClass().equals(Json.class)){
-                s+="{ \""+j.getKey()+"\""+" : \n    "+"  "+j.getValue()+"  } ";
+                s+=" \""+j.getKey()+"\""+" :\n"+"  "+j.getValue()+"   ";
             }
             else{
-                s+="{ \""+j.getKey()+"\""+":"+"\""+j.getValue()+"\" } ";
+                s+=" \""+j.getKey()+"\""+":"+"\""+j.getValue()+"\"  ";
             }
             k=", \n";
         }
+        s+="}";
         return s;
     }
     

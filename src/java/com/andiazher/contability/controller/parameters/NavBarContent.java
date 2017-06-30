@@ -5,8 +5,14 @@
  */
 package com.andiazher.contability.controller.parameters;
 
+import com.andiazher.contability.app.App;
+import com.andiazher.contability.controller.Json;
+import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,15 +35,24 @@ public class NavBarContent extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try{
             if(request.getSession().getAttribute("isSession").equals("true")){
                 try{
-                    
+                    Entitie navbar = new Entitie(App.TABLE_NAVBAR);
+                    Json json= new Json();
+                    for(Entitie nv : navbar.getEntities()){
+                        json.add(nv.getId(), nv.getJson());
+                    }
+                    try (PrintWriter out = response.getWriter()) {
+                        out.print(json);
+                    }
                 }catch(NullPointerException s){
                     try (PrintWriter out = response.getWriter()) {
-                        out.println("0");
+                        Json j= new Json();
+                        j.add("error", "Error: "+s);
+                        out.print(j);
                     }                     
                 }
             }else{
@@ -60,7 +75,11 @@ public class NavBarContent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NavBarContent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

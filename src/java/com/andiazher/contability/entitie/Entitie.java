@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.json.JsonObject;
 
 /**
  *
@@ -78,11 +77,13 @@ public final class Entitie{
     }
 
     public Json getJson() {
+        json.setObject(data);
         return json;
     }
 
     public void setJson(Json json) {
         this.json = json;
+        this.json.setObject(data);
     }
     
     
@@ -175,6 +176,7 @@ public final class Entitie{
                 data.put( j.getKey(), query.getString( j.getKey() ));
             }
         }
+        data.put("ID", getId());
     }
     
     /**
@@ -204,6 +206,7 @@ public final class Entitie{
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
+            entitie.getDataMap().put( "ID",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -236,6 +239,7 @@ public final class Entitie{
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
+            entitie.getDataMap().put( "ID",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -278,6 +282,7 @@ public final class Entitie{
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
+            entitie.getDataMap().put( "ID",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -303,6 +308,7 @@ public final class Entitie{
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
+            entitie.getDataMap().put( "ID",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -324,6 +330,7 @@ public final class Entitie{
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
+            entitie.getDataMap().put( "ID",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;

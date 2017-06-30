@@ -50,7 +50,7 @@
                     <b>Your Account</b>
                 </div>
                 <div class="panel-body">
-                    <p class="text-center text-danger" id="error"><%=name%></p>
+                    <p class="text-center text-danger" id="error" style="text-shadow: 2px 2px 2px black; color: white;"><%=name%></p>
                     <form action="loginApp#login=true&key=<%=session.getId()%>" id="loginForm" method="post">
                         <input type="hidden" value="login" name="param">
                         <div class="form-group">
@@ -74,6 +74,17 @@
         
     </body>
     <style>
+        body {
+            width:100%;
+            height:100%;
+            background: url("pages/images/font3.jpg") no-repeat center center fixed;
+            background-color: #2F2D2D;
+            background-repeat: no-repeat;
+            background-size: cover;
+           -moz-background-size: cover;
+           -webkit-background-size: cover;
+           -o-background-size: cover;
+        }
         .navbar{
             background: white;
         }

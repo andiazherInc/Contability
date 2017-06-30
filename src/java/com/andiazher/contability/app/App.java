@@ -21,6 +21,7 @@ public class App {
     //TABLES
     public static String TABLE_LOGIN = "login";
     public static String TABLE_USERS = "usuarios";
+    public static String TABLE_NAVBAR = "navbar";
     
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){

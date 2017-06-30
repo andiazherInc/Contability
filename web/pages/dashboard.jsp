@@ -60,15 +60,27 @@
             }
             else{
                 var q= "<%=q2%>";
-                $.post("pages/dashboard/navbar.jsp"+q, {}, function(data){
-                    $("#navbar").html(data);
-                });
-                $.post("pages/dashboard/menu.jsp"+q, {}, function(data){
-                    $("#menu").html(data);
-                });
-                $.post("pages/dashboard/contend.jsp"+q, {}, function(data){
-                    $("#contenido").html(data);
-                });
+                setTimeout(function() {
+                    $( function() {
+                        $.post("pages/dashboard/navbar.jsp"+q, {}, function(data){
+                            $("#navbar").html(data);
+                        });
+                    } );    
+                }, 500);
+                setTimeout(function() {
+                    $( function() {
+                        $.post("pages/dashboard/menu.jsp"+q, {}, function(data){
+                            $("#menu").html(data);
+                        });
+                    } );    
+                }, 800);
+                setTimeout(function() {
+                    $( function() {
+                        $.post("pages/dashboard/contend.jsp"+q, {}, function(data){
+                            $("#contenido").html(data);
+                        });
+                    } );    
+                }, 1000);
                 $.post("pages/dashboard/footer.jsp"+q, {}, function(data){
                     $("#footer").html(data);
                 });

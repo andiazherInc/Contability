@@ -62,9 +62,9 @@ public class LoginApp extends HttpServlet {
                             response.sendRedirect("login.jsp?error=Credenciales+invalidas");
                         }
                     }catch(IndexOutOfBoundsException s){
-                        response.sendRedirect("login.jsp?error=Credenciales+invalidas; Error:"+s.getMessage());
+                        response.sendRedirect("login.jsp?error=Credenciales+invalidas");
                     }catch(NullPointerException s){
-                        response.sendRedirect("login.jsp?error=Sorry: Has ocurred a error: "+s.toString());
+                        response.sendRedirect("login.jsp?error=Error: "+s.toString());
                     }
                 }
             }

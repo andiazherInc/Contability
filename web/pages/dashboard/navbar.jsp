@@ -50,8 +50,8 @@
 
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Link1 <span class="sr-only">(current)</span></a></li>
+                    <ul class="nav navbar-nav" id="menusnavbar">
+                      <li class="active"><a href="#">Link1</a></li>
                       <li><a href="#">Link2</a></li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -114,6 +114,33 @@
             });
         }
         laodName();
+        function loadNavbar(){
+            $.post("navBarContent", {}, function(data){
+                var v = JSON.parse(data);
+                if(v.error!=""){
+                    for(i in v){
+                        menu= v[i];
+                        if(menu.ISDROPDOWN=="1"){
+                          $("#menusnavbar").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.NAME+"<span class=\"caret\"></span></a></li>");  
+                        }
+                        else{
+                          if (menu.ISURLORMETHOD=="1") {
+                            $("#menusnavbar").append("<li><a href=\"#"+menu.NAME+"\" onclick=\""+menu.URLORMETHOT+"\">"+menu.NAME+"</a></li>");  
+                          }else{
+                            $("#menusnavbar").append("<li><a href=\""+menu.URLORMETHOT+"\">"+menu.NAME+"</a></li>");
+                          }
+                        }
+                        
+                    }
+                }
+            });
+        }
+        setTimeout(function() {
+          $( function() {
+            loadNavbar();      
+          } );    
+        }, 200);
+        
     </script>
     
 </html>
