@@ -7,11 +7,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String q="";
+    String color="";
+    String image="";
     try{
         if(!request.getParameter("q").equals("null")){
             q = "?q="+request.getParameter("q");
         }
+        
     }catch(NullPointerException s){}
+    try{
+        color= session.getAttribute("color").toString();
+        image= session.getAttribute("image").toString();
+    }
+    catch(NullPointerException s){}
 %>
 <!DOCTYPE html>
 <html>
@@ -63,8 +71,8 @@
         body {
             width:100%;
             height:100%;
-            background: url("pages/images/font3.jpg") no-repeat center center fixed;
-            background-color: #2F2D2D;
+            background: url("pages/images/<%=image%>") no-repeat center center fixed;
+            background-color: <%=color%>;
             background-repeat: no-repeat;
             background-size: cover;
            -moz-background-size: cover;

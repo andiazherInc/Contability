@@ -69,7 +69,7 @@
                       <form class="navbar-form navbar-left" action="search#search" method="get" id="search">
                       <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for..." name="q" value="<%=q%>">
+                            <input type="text" class="form-control" placeholder="Search for..." name="q" value="<%=q%>" required>
                             <span class="input-group-btn">
                               <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </span>

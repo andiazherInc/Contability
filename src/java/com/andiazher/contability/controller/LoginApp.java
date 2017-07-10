@@ -56,6 +56,8 @@ public class LoginApp extends HttpServlet {
                             System.out.println("The user "+user+" has login at "+ f);
                             request.getSession().setAttribute("isSession", "true");
                             request.getSession().setAttribute("user", user);
+                            request.getSession().setAttribute("color", login.getDataOfLabel("backgroundcolor"));
+                            request.getSession().setAttribute("image", login.getDataOfLabel("backgroundcolorimage"));
                             response.sendRedirect("app.jsp");
                         }
                         else{
