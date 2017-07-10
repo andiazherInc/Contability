@@ -44,12 +44,13 @@
                 <h3 class="col-md-offset-1 col-sm-offset-2"> Sistema de Contabilidad</h3>
             </nav>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-8 col-md-offset-7 col-sm-offset-5 ">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-8 col-md-offset-7 col-sm-offset-5 setTopToFloorScreenDiv">
             <div class="panel " style="background: transparent;">
                 <div class="panel-headingt text-center" style="text-shadow: 2px 2px 2px black; color: white;">
-                    <b>Your Account</b>
+                    <br>
+                    <b>Login with your Account</b>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body ">
                     <p class="text-center text-danger" id="error" style="text-shadow: 2px 2px 2px black; color: white;"><%=name%></p>
                     <form action="loginApp#login=true&key=<%=session.getId()%>" id="loginForm" method="post">
                         <input type="hidden" value="login" name="param">
@@ -77,13 +78,19 @@
         body {
             width:100%;
             height:100%;
-            background: url("pages/images/font3.jpg") no-repeat center center fixed;
+            background: url("pages/images/font2.jpg") no-repeat center center fixed;
             background-color: #2F2D2D;
             background-repeat: no-repeat;
             background-size: cover;
            -moz-background-size: cover;
            -webkit-background-size: cover;
            -o-background-size: cover;
+        }
+        .setTopToFloorScreenDiv{
+            height:100%;
+            background-color: black;
+            opacity: 0.8;
+            top:0px;
         }
         .navbar{
             background: white;

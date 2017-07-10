@@ -12,6 +12,10 @@
         <servlet-name>NavBarContent</servlet-name>
         <servlet-class>com.andiazher.contability.controller.parameters.NavBarContent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.parameters.Search</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>NavBarContent</servlet-name>
         <url-pattern>/navBarContent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

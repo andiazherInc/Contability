@@ -35,10 +35,10 @@
     </head>
     <body>
         <div class="panel panel-default contenido" > <!--style="background: transparent;"-->
-                <div class="panel-heading"> <!--background-color: black; opacity: 0.9; color: white;-->
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> This is a Example of title
+                <div class="panel-heading" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> <!--background-color: black; opacity: 0.9; color: white;-->
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> <titleContend id="titleContend">This is a Example of title</titleContend>
                 </div>
-                <div class="panel-body " > <!--style="background-color: black; opacity: 0.8; color: white;"-->
+                <div class="panel-body " id="content"> <!--style="background-color: black; opacity: 0.8; color: white;"-->
                     <p>
                         Includes over 250 glyphs in font format from the Glyphicon 
                         Halflings set. Glyphicons Halflings are normally not available 
@@ -81,4 +81,12 @@
                 </div>
         </div>
     </body>
+    <script type="text/javascript">
+        function setTitleContend(title){
+            $("#titleContend").html(title);
+        }
+        function setContendToContend(html){
+            $("#content").html(html);   
+        }
+    </script>
 </html>

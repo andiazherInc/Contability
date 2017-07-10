@@ -38,7 +38,7 @@
             <div class="panel-heading" > <!--style="background-color: black; opacity: 0.9; color: white;"-->
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Options
             </div>
-            <div class="panel-body" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
+            <div class="panel-body" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" id="contentMenu"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
                 <a href="#" class="">
                     Cras justo odio at line 23 for software is treable by andiazher Inc and Companies
                 </a><br>
@@ -52,6 +52,10 @@
             </div>
             
         </div>
-        
     </body>
+    <script type="text/javascript">
+        function setContendToMenu(html){
+            $("#contentMenu").html(html);   
+        }
+    </script>
 </html>

@@ -64,13 +64,13 @@ public class LoginApp extends HttpServlet {
                     }catch(IndexOutOfBoundsException s){
                         response.sendRedirect("login.jsp?error=Credenciales+invalidas");
                     }catch(NullPointerException s){
-                        response.sendRedirect("login.jsp?error=Error: "+s.toString());
+                        response.sendRedirect("login.jsp?error=Error: "+s.toString() +" "+s.getMessage());
                     }
                 }
             }
             if(param1.equals("logout")){
                 request.getSession().setAttribute("isSession", "");
-                response.sendRedirect("login.jsp?logout=true");
+                response.sendRedirect("login.jsp?logout=true&newKey="+request.changeSessionId());
             }
         }
         catch(NullPointerException s){

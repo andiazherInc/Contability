@@ -6,8 +6,11 @@
 package com.andiazher.contability.app;
 
 import com.andiazher.contability.db.ConnectionMysql;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -51,6 +54,20 @@ public class App {
     
     public static String getVersionApp(){
         return versionCompilation;
+    }
+    
+    public static boolean isSession(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        try{
+            if(request.getSession().getAttribute("isSession").equals("true")){
+                return  true;
+            }
+            else{
+                response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
+            }
+        }catch(NullPointerException s){
+            response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
+        }
+        return false;
     }
     
 }

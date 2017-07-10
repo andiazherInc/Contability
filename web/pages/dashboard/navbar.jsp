@@ -66,7 +66,7 @@
                         </ul>
                       </li>
                     </ul>
-                      <form class="navbar-form navbar-left" action="#search" method="get">
+                      <form class="navbar-form navbar-left" action="search#search" method="get" id="search">
                       <div class="form-group">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for..." name="q" value="<%=q%>">
@@ -133,6 +133,9 @@
                         
                     }
                 }
+                else{
+                  $("#menusnavbar").append("Error. No loads menus");
+                }
             });
         }
         setTimeout(function() {
@@ -140,7 +143,19 @@
             loadNavbar();      
           } );    
         }, 200);
-        
+    $(document).ready(function(){
+      $("#search").submit(function(){
+          $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function(data){
+                      search(data);
+                  }
+                })
+            return false;
+        });
+    });
     </script>
     
 </html>

@@ -13,11 +13,11 @@ import java.util.Map;
  *
  * @author andre
  */
-public class Json {
+public class JSONA {
     
     private Map<String, Object> object;
 
-    public Json() {
+    public JSONA() {
         object= new HashMap<>();
     }
     
@@ -25,7 +25,7 @@ public class Json {
         object.put(key, value);
     }
     
-    public void add(String key, Json value){
+    public void add(String key, JSONA value){
         object.put(key, value);
     }
 
@@ -45,7 +45,7 @@ public class Json {
         String k = "";
         for(Map.Entry<String, Object> j: object.entrySet()){
             s+=k;
-            if(j.getValue().getClass().equals(Json.class)){
+            if(j.getValue().getClass().equals(JSONA.class)){
                 s+=" \""+j.getKey()+"\""+" :\n"+"  "+j.getValue()+"   ";
             }
             else{
@@ -55,25 +55,6 @@ public class Json {
         }
         s+="}";
         return s;
-    }
-    
-    public static void main(String[] args) {
-        Json j= new Json();
-        j.add("name", "Andres Diaz");
-        j.add("edad", "22");
-        Json k= new Json();
-        k.add("name1", "Lucy");
-        k.add("edad", "21");
-        k.add("novio", "Andres");
-        Json l= new Json();
-        l.add("Ojos", "Cafes");
-        k.add("otros", l);
-        
-        j.add("novia", k);
-        j.add("sexo", "Mas");
-        j.add("novia2", k);
-        
-        System.out.println(j);
     }
     
 }

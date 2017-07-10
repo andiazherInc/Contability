@@ -7,7 +7,7 @@ package com.andiazher.contability.entitie;
 
 
 import com.andiazher.contability.app.App;
-import com.andiazher.contability.controller.Json;
+import com.andiazher.contability.controller.JSONA;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,13 +23,13 @@ public final class Entitie{
     private String name;
     private String id;
     private Map<String, Object > data;
-    private Json json;
+    private JSONA json;
 
     public Entitie() {
         setData(new HashMap<>());
         setName("PROTOTIPE");
         setId("0");
-        setJson( new Json() );
+        setJson(new JSONA() );
     }
     
     
@@ -37,7 +37,7 @@ public final class Entitie{
         setData(new HashMap<>());
         setName(name);
         setId("0");
-        setJson( new Json() );
+        setJson(new JSONA() );
         String sql = "";
         sql+="SELECT COLUMN_NAME FROM "+App.getConnectionMysql().getInformationSchema()+".columns "
                 + "where table_schema ='"+App.getConnectionMysql().getDb()+"' and table_name='"+name+"'";
@@ -76,12 +76,12 @@ public final class Entitie{
         this.name = name;
     }
 
-    public Json getJson() {
+    public JSONA getJson() {
         json.setObject(data);
         return json;
     }
 
-    public void setJson(Json json) {
+    public void setJson(JSONA json) {
         this.json = json;
         this.json.setObject(data);
     }

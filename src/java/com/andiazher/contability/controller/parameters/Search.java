@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.andiazher.contability.controller;
+package com.andiazher.contability.controller.parameters;
 
 import com.andiazher.contability.app.App;
-import com.andiazher.contability.entitie.Entitie;
+import com.andiazher.contability.controller.JSONA;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author andre
  */
-public class LoginParamters extends HttpServlet {
+public class Search extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,39 +30,25 @@ public class LoginParamters extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
             if(App.isSession(request, response)){
-                String username="";
-                try{
-                    username= request.getParameter("user");
-                    Entitie login = new Entitie(App.TABLE_LOGIN);
-                    login= login.getEntitieParam("usuario", username).get(0);
-                    Entitie user = new Entitie(App.TABLE_USERS);
-                    user = user.getEntitieParam("user", login.getId()).get(0);
-                    try (PrintWriter out = response.getWriter()) {
-                        if(user.getDataOfLabel("name").equals("") && user.getDataOfLabel("lastname").equals("") && 
-                                user.getDataOfLabel("name").equals(" ") && user.getDataOfLabel("lastname").equals(" ")){
-                            out.println("0");
-                        }
-                        else{
-                            out.println(user.getDataOfLabel("name")+" "+user.getDataOfLabel("lastname"));
-                        }
-                    } 
-                }catch(NullPointerException | IndexOutOfBoundsException e){
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println("0");
-                    }                     
+                JSONA j= new JSONA();
+                String q= request.getParameter("q");
+                j.add("q", q);
+                j.add("number", "0");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(j);
                 }
             }
         }catch(NullPointerException s){
-            response.sendRedirect("login.jsp?error=Credenciales+invalidas");
+            response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
         }
-        
         
     }
 
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -77,11 +60,7 @@ public class LoginParamters extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginParamters.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

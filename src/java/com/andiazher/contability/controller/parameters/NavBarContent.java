@@ -6,7 +6,7 @@
 package com.andiazher.contability.controller.parameters;
 
 import com.andiazher.contability.app.App;
-import com.andiazher.contability.controller.Json;
+import com.andiazher.contability.controller.JSONA;
 import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,10 +38,10 @@ public class NavBarContent extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            if(request.getSession().getAttribute("isSession").equals("true")){
+            if(App.isSession(request,response)){
                 try{
                     Entitie navbar = new Entitie(App.TABLE_NAVBAR);
-                    Json json= new Json();
+                    JSONA json= new JSONA();
                     for(Entitie nv : navbar.getEntities()){
                         json.add(nv.getId(), nv.getJson());
                     }
@@ -50,13 +50,11 @@ public class NavBarContent extends HttpServlet {
                     }
                 }catch(NullPointerException s){
                     try (PrintWriter out = response.getWriter()) {
-                        Json j= new Json();
+                        JSONA j= new JSONA();
                         j.add("error", "Error: "+s);
                         out.print(j);
                     }                     
                 }
-            }else{
-                response.sendRedirect("login.jsp?error=Credenciales+invalidas");
             }
         }
         catch(NullPointerException s){
