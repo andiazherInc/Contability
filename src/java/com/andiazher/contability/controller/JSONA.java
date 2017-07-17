@@ -5,7 +5,6 @@
  */
 package com.andiazher.contability.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +31,9 @@ public class JSONA {
     public Map<String, Object> getObject() {
         return object;
     }
-
+    public Object getValue(String key){
+        return object.get(key);
+    }
     public void setObject(Map<String, Object> object) {
         this.object = object;
     }

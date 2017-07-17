@@ -45,9 +45,7 @@ public final class Entitie{
             ResultSet resultSet = App.consult(sql);
             while(resultSet.next()){
                 String request = resultSet.getString("COLUMN_NAME");
-                if(!request.equals("ID")){
-                    data.put(request, "");
-                }
+                data.put(request, "");
             }
         }
         catch(SQLException s){
@@ -100,7 +98,7 @@ public final class Entitie{
     public ArrayList<String> getData() {
         ArrayList<String> datos = new ArrayList<>();
         for(Map.Entry<String, Object> j: data.entrySet()){
-            datos.add(j.getKey());
+            datos.add(j.getValue().toString());
         }
         return datos;
     }
@@ -147,7 +145,7 @@ public final class Entitie{
             datos+= k +" "+ j.getKey()+"='"+j.getValue()+"'";
             k = ",";
         }
-        sql+="update "+App.getConnectionMysql().getDb()+"."+name+" set "+datos+" where ID = "+id;
+        sql+="update "+App.getConnectionMysql().getDb()+"."+name+" set "+datos+" where id = "+id;
         return App.update(sql);
     }
     /**
@@ -157,7 +155,7 @@ public final class Entitie{
      */
     public boolean delete() throws SQLException{
         String sql = "";
-        sql+="delete from "+App.getConnectionMysql().getDb()+"."+name+ " where ID = "+id;
+        sql+="delete from "+App.getConnectionMysql().getDb()+"."+name+ " where id = "+id;
         return App.update(sql);
     }
     
@@ -166,9 +164,9 @@ public final class Entitie{
      * @param id
      * @throws SQLException 
      */
-    public void getEntitieID(String id) throws SQLException{
+    public void getEntitieId(String id) throws SQLException{
         String sql = "";
-        sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name +" where ID="+id ;
+        sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name +" where id="+id ;
         ResultSet query= App.consult(sql);
         setId(id);
         while(query.next()){
@@ -176,7 +174,6 @@ public final class Entitie{
                 data.put( j.getKey(), query.getString( j.getKey() ));
             }
         }
-        data.put("ID", getId());
     }
     
     /**
@@ -202,11 +199,11 @@ public final class Entitie{
         ArrayList<Entitie> entities= new ArrayList<>();
         while(query.next()){
             Entitie entitie = new Entitie(name);
-            entitie.setId(query.getString(name+".ID"));
+            entitie.setId(query.getString(name+".id"));
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
-            entitie.getDataMap().put( "ID",  entitie.getId() );
+            entitie.getDataMap().put( "id",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -235,11 +232,11 @@ public final class Entitie{
         ArrayList<Entitie> entities= new ArrayList<>();
         while(query.next()){
             Entitie entitie = new Entitie(name);
-            entitie.setId(query.getString(name+".ID"));
+            entitie.setId(query.getString(name+".id"));
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
-            entitie.getDataMap().put( "ID",  entitie.getId() );
+            entitie.getDataMap().put( "id",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -254,7 +251,7 @@ public final class Entitie{
      * @throws SQLException 
      */
     public ArrayList<Entitie> getEntitieParams(ArrayList<String> param, ArrayList<String> param2, ArrayList<String> opera, String sqlq, String Otables ) throws SQLException{
-        String sql = "SELECT "+name+".ID, ";
+        String sql = "SELECT "+name+".id, ";
         String k = "";
         for(Map.Entry<String, Object> j: data.entrySet()){
             sql+= k + " " + name + "." + j.getKey();
@@ -278,11 +275,11 @@ public final class Entitie{
         ArrayList<Entitie> entities= new ArrayList<>();
         while(query.next()){
             Entitie entitie = new Entitie(name);
-            entitie.setId(query.getString(name+".ID"));
+            entitie.setId(query.getString(name+".id"));
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
-            entitie.getDataMap().put( "ID",  entitie.getId() );
+            entitie.getDataMap().put( "id",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -304,11 +301,11 @@ public final class Entitie{
         ArrayList<Entitie> entities= new ArrayList<>();
         while(query.next()){
             Entitie entitie = new Entitie(name);
-            entitie.setId(query.getString("ID"));
+            entitie.setId(query.getString("id"));
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
-            entitie.getDataMap().put( "ID",  entitie.getId() );
+            entitie.getDataMap().put( "id",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;
@@ -316,21 +313,21 @@ public final class Entitie{
     
     /**
      * 
-     * @return TODAS LAS ENTIDADES
+     * @return TODAS LAS ENTidADES
      * @throws SQLException 
      */
     public ArrayList<Entitie> getEntities() throws SQLException{
         String sql = "";
-        sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name + " order by ID";
+        sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name + " order by id";
         ResultSet query= App.consult(sql);
         ArrayList<Entitie> entities= new ArrayList<>();
         while(query.next()){
             Entitie entitie = new Entitie(name);
-            entitie.setId(query.getString("ID"));
+            entitie.setId(query.getString("id"));
             for(Map.Entry<String, Object> j: data.entrySet()){
                 entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
             }
-            entitie.getDataMap().put( "ID",  entitie.getId() );
+            entitie.getDataMap().put( "id",  entitie.getId() );
             entities.add(entitie);
         }
         return entities;

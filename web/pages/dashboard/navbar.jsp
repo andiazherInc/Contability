@@ -52,19 +52,6 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="menusnavbar">
                       <li class="active"><a href="#">Link1</a></li>
-                      <li><a href="#">Link2</a></li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Action</a></li>
-                          <li><a href="#">Another action</a></li>
-                          <li><a href="#">Something else here</a></li>
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#">Separated link</a></li>
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#">One more separated link</a></li>
-                        </ul>
-                      </li>
                     </ul>
                       <form class="navbar-form navbar-left" action="search#search" method="get" id="search">
                       <div class="form-group">
@@ -120,14 +107,31 @@
                 if(v.error!=""){
                     for(i in v){
                         menu= v[i];
-                        if(menu.ISDROPDOWN=="1"){
-                          $("#menusnavbar").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.NAME+"<span class=\"caret\"></span></a></li>");  
+                        if(menu.isdropdown=="1"){
+                          var ls="";
+                          ls+= "<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.name+"<span class=\"caret\"></span></a>";  
+                          ls+="<ul class=\"dropdown-menu\">";
+                          for(n in menu.steps){
+                            step = menu.steps[n];
+                            if(step.id!="0"){
+                              if(step.isurlormethod=="1"){
+                                ls+="<li><a href=\""+step.urlormethod+"\">"+step.name+"</a></li>";    
+                              }else{
+                                ls+="<li><a href=\"#"+step.name+"\" onclick=\""+step.urlormethod+"\">"+step.name+"</a></li>";    
+                              }
+                            }else{
+                              ls+="<li role=\"separator\" class=\"divider\"></li>";
+                            }
+                          }
+                          ls+="</ul>";
+                          ls+="</li>";
+                          $("#menusnavbar").append(ls);
                         }
                         else{
-                          if (menu.ISURLORMETHOD=="1") {
-                            $("#menusnavbar").append("<li><a href=\"#"+menu.NAME+"\" onclick=\""+menu.URLORMETHOT+"\">"+menu.NAME+"</a></li>");  
+                          if (menu.isurlormethod=="1") {
+                            $("#menusnavbar").append("<li><a href=\""+menu.urlormethod+"\">"+menu.name+"</a></li>");
                           }else{
-                            $("#menusnavbar").append("<li><a href=\""+menu.URLORMETHOT+"\">"+menu.NAME+"</a></li>");
+                            $("#menusnavbar").append("<li><a href=\"#"+menu.name+"\" onclick=\""+menu.urlormethod+"\">"+menu.name+"</a></li>");  
                           }
                         }
                         

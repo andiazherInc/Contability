@@ -22,9 +22,12 @@ public class App {
     private static ConnectionMysql connectionMysql = new ConnectionMysql();
     
     //TABLES
-    public static String TABLE_LOGIN = "login";
-    public static String TABLE_USERS = "usuarios";
-    public static String TABLE_NAVBAR = "navbar";
+    public static String TABLE_LOGIN = "andiazher_login";
+    public static String TABLE_USERS = "config_usuarios";
+    public static String TABLE_NAVBAR = "config_navbar";
+    public static String TABLE_NAVBARSTEP = "config_navbarsteps";
+    public static String TABLE_ROLE = "config_role";
+    public static String TABLE_ROLENAV = "config_rolenavbars";
     
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){

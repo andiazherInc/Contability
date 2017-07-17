@@ -78,7 +78,7 @@
         body {
             width:100%;
             height:100%;
-            background: url("pages/images/font2.jpg") no-repeat center center fixed;
+            background: url("pages/images/font1.jpg") no-repeat center center fixed;
             background-color: #2F2D2D;
             background-repeat: no-repeat;
             background-size: cover;
