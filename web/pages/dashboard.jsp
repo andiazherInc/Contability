@@ -90,7 +90,7 @@
         function search(data){
             try{
                 var v = JSON.parse(data);
-                setTitleContend("Resultados de busquera para \"<b>"+v.q+"</b>\"");
+                setTitleContend("Resultados de busqueda para \"<b>"+v.q+"</b>\"");
                 setContendToMenu("<a href=\"?q="+v.q+"&search=1\" >Busqueda avanzada</a>");
                 if(v.number=="0"){
                     setContendToContend("<h4>No se han encontrado resultado para <b>\""+v.q+"\"</b>.<h4>")

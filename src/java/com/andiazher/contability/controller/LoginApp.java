@@ -72,7 +72,7 @@ public class LoginApp extends HttpServlet {
                 }
             }
             if(param1.equals("logout")){
-                request.getSession().setAttribute("isSession", "");
+                request.getSession().removeAttribute("isSession");
                 response.sendRedirect("login.jsp?logout=true&newKey="+request.changeSessionId());
             }
         }

@@ -34,7 +34,7 @@
         <title>FOOTER</title>
     </head>
     <body>
-        <div style="text-shadow: 2px 0px 1px black;">
+        <div style="text-shadow: 0px 0px 0px black;">
             <br>
             <p class="text-right" id="copyright" style="color:white;">by <a href="http://andiazher.com/about?ref=Software+Accounting&V=1.0">andiazher Inc</a> &copy;   </p>
             <p class="text-right no-print" style="color:white;">Software Accounting - Team andiazher Software - V1.0</p>    
@@ -46,7 +46,7 @@
     <script>
         function loadCopyri(){
             var date = new Date().getFullYear();
-            $("#copyright").html("by <a href=\"http://andiazher.com/about?ref=Software+Accounting&V=1.0\">andiazher Inc</a> &copy; "+date+"    ");
+            $("#copyright").html("by<a href=\"http://andiazher.com/about?ref=Software+Accounting&V=1.0\" class=\"btn\">andiazher Inc</a>&copy; "+date+"    ");
         }
         loadCopyri();
     </script>

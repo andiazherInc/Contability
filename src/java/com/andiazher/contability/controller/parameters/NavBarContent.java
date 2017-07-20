@@ -43,11 +43,14 @@ public class NavBarContent extends HttpServlet {
                 try{
                     Entitie navbar = new Entitie(App.TABLE_NAVBAR);
                     Entitie navbarstep = new Entitie(App.TABLE_NAVBARSTEP);
+                    
                     JSONA navbars= new JSONA();
                     
                     //REQUEST TO NAVSBAR AND NAVBARSSTEPS FOR ROLE AND USER
                     Entitie rolenav = new Entitie(App.TABLE_ROLENAV);
                     ArrayList<Entitie> regiters = rolenav.getEntitieParam("role", request.getSession().getAttribute("role").toString());                    
+                    
+                    
                     for(Entitie r: regiters){
                         String idnavbar= r.getDataOfLabel("navbar").toString();
                         if(navbars.getValue(idnavbar)==null){
