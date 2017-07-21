@@ -43,20 +43,31 @@ public class NavBarContent extends HttpServlet {
                 try{
                     Entitie navbar = new Entitie(App.TABLE_NAVBAR);
                     Entitie navbarstep = new Entitie(App.TABLE_NAVBARSTEP);
+                    Entitie role = new Entitie(App.TABLE_ROLE);
                     
                     JSONA navbars= new JSONA();
                     
                     //REQUEST TO NAVSBAR AND NAVBARSSTEPS FOR ROLE AND USER
                     Entitie rolenav = new Entitie(App.TABLE_ROLENAV);
                     ArrayList<Entitie> regiters = rolenav.getEntitieParam("role", request.getSession().getAttribute("role").toString());                    
-                    
-                    
-                    for(Entitie r: regiters){
+                    role.getEntitieId(request.getSession().getAttribute("role").toString());
+                    String na= role.getDataOfLabel("defaultnav").toString();
+                    boolean existMnu=false;
+                    for(Entitie r: regiters){    
                         String idnavbar= r.getDataOfLabel("navbar").toString();
+                        
                         if(navbars.getValue(idnavbar)==null){
                             navbar = new Entitie(App.TABLE_NAVBAR);
                             navbar.getEntitieId(idnavbar);
                             navbars.add(navbar.getId(), navbar.getJson());
+                            //AD PROPERTY ACTIVE CLASS TO MENU
+                            if(na.equals(r.getId())){
+                                JSONA temp = (JSONA) navbars.getValue(idnavbar);
+                                request.getSession().setAttribute("rolnavid", r.getId());
+                                temp.add("active", "active");
+                                navbars.add(idnavbar, temp);
+                                existMnu=true;
+                            }
                         }
                         String idnavbarsteps= r.getDataOfLabel("navbarsteps").toString();
                         navbarstep = new Entitie(App.TABLE_NAVBARSTEP);
@@ -69,6 +80,17 @@ public class NavBarContent extends HttpServlet {
                         steps.add(idnavbarsteps, navbarstep.getJson());
                         temp.add("steps", steps);
                         navbars.add(idnavbar, temp);
+                    }
+                    if(!existMnu){
+                        boolean first=true;
+                        for(Map.Entry<String, Object> j: navbars.getObject().entrySet()){
+                            if(first){
+                                first=false;
+                                JSONA temp= (JSONA) j.getValue();
+                                temp.add("active", "active");
+                                navbars.add(j.getKey(), temp);
+                            }
+                        }
                     }
                     //RETURN OF JSON CODE TO SERVER WHIT DATA OF NAVBAR 
                     try (PrintWriter out = response.getWriter()) {

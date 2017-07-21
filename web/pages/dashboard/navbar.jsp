@@ -31,7 +31,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>NavBar</title>
 
     </head>
     <body>
@@ -45,13 +45,13 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                      <a class="navbar-brand" href="#reload" onclick="reloadAll()">SCP</a>
+                      <a class="navbar-brand" href="#reload" onclick="reloadAll()"><img src="pages/images/market.png" alt="Smiley face" height="32" width="130"></a>
                   </div>
 
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="menusnavbar">
-                      <li class="active"><a href="#">Link1</a></li>
+                        <!-- HERE CODE MENUS -->
                     </ul>
                       <form class="navbar-form navbar-left" action="search#search" method="get" id="search">
                       <div class="form-group">
@@ -104,20 +104,22 @@
         function loadNavbar(){
             $.post("navBarContent", {}, function(data){
                 var v = JSON.parse(data);
+                $("#menusnavbar").html("");
                 if(v.error!=""){
                     for(i in v){
                         menu= v[i];
                         if(menu.isdropdown=="1"){
                           var ls="";
-                          ls+= "<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.name+"<span class=\"caret\"></span></a>";  
+                          ls+= "<li class=\"dropdown "+menu.active+" \"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.name+"<span class=\"caret\"></span></a>";  
                           ls+="<ul class=\"dropdown-menu\">";
                           for(n in menu.steps){
                             step = menu.steps[n];
                             if(step.id!="0"){
                               if(step.isurlormethod=="1"){
-                                ls+="<li><a href=\""+step.urlormethod+"\">"+step.name+"</a></li>";    
+                                ls+="<li><a href=\""+step.urlormethod+"\" target=\"_blank\">"+step.name+"</a></li>";
                               }else{
-                                ls+="<li><a href=\"#"+step.name+"\" onclick=\""+step.urlormethod+"\">"+step.name+"</a></li>";    
+                                ls+="<li><a href=\"#"+step.name+"\" onclick=\""+step.urlormethod+"\">"+step.name+"</a></li>";
+                                //ls+="<script>"+step.urlormethod+"<\/script>";
                               }
                             }else{
                               ls+="<li role=\"separator\" class=\"divider\"></li>";
@@ -129,9 +131,10 @@
                         }
                         else{
                           if (menu.isurlormethod=="1") {
-                            $("#menusnavbar").append("<li><a href=\""+menu.urlormethod+"\">"+menu.name+"</a></li>");
+                            $("#menusnavbar").append("<li class=\""+menu.active+"\"><a href=\""+menu.urlormethod+"\" target=\"_blank\">"+menu.name+"</a></li>");
                           }else{
-                            $("#menusnavbar").append("<li><a href=\"#"+menu.name+"\" onclick=\""+menu.urlormethod+"\">"+menu.name+"</a></li>");  
+                            $("#menusnavbar").append("<li class=\""+menu.active+"\"><a href=\"#"+menu.name+"\" onclick=\""+menu.urlormethod+"\">"+menu.name+"</a></li>");
+                            $("#menusnavbar").append("<script>"+menu.urlormethod+"<\/script>");
                           }
                         }
                         

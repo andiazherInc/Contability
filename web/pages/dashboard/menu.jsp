@@ -39,7 +39,7 @@
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Options
             </div>
             <div class="panel-body " style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" id="contentMenu"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
-                
+                Loading menus, please wait .... 
             </div>
             <div class="panel-footer" > <!--style="background-color: black; opacity: 0.9; color: white;"-->
                 
@@ -50,6 +50,33 @@
     <script type="text/javascript">
         function setContendToMenu(html){
             $("#contentMenu").html(html);   
+        }
+        function loadMenus(){
+            $.post("menusContent", {}, function(data){
+                var v = JSON.parse(data);
+                $("#contentMenu").html("");
+                var isfirst=true;
+                if(v.error!=""){
+                    for(i in v){
+                        menu= v[i];
+                        if (menu.ispageorurl=="1") {
+                            $("#contentMenu").append("<a href=\"#"+menu.name+"\">"+menu.name+"</a><br>");
+                            if(isfirst){
+                                setTitleContend(menu.name);
+                                $.post(""+menu.page, {}, function(data){
+                                    setContendToContend(data);
+                                });
+                                isfirst=false;
+                            }
+                        }else{
+                            $("#contentMenu").append("<a href=\""+menu.page+"\" target=\"_blank\">"+menu.name+"<a><br>");
+                        }
+                        
+                    }
+                }else{
+                  $("#contentMenu").append("Error. No loads menus");
+                }
+            });
         }
     </script>
 </html>

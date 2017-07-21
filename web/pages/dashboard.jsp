@@ -51,7 +51,7 @@
         </div>
     </body>
     <script>
-
+        
         function load(param){
             var idSession= param;
             if(idSession=="" || idSession =="null" || idSession==undefined){
@@ -61,27 +61,24 @@
             }
             else{
                 var q= "<%=q2%>";
-                setTimeout(function() {
-                    $( function() {
-                        $.post("pages/dashboard/navbar.jsp"+q, {}, function(data){
-                            $("#navbar").html(data);
-                        });
-                    } );    
-                }, 500);
+                $.post("pages/dashboard/navbar.jsp"+q, {}, function(data){
+                    $("#navbar").html(data);
+                });
+                
                 setTimeout(function() {
                     $( function() {
                         $.post("pages/dashboard/menu.jsp"+q, {}, function(data){
                             $("#menu").html(data);
                         });
                     } );    
-                }, 800);
+                }, 200);
                 setTimeout(function() {
                     $( function() {
                         $.post("pages/dashboard/contend.jsp"+q, {}, function(data){
                             $("#contenido").html(data);
                         });
                     } );    
-                }, 1000);
+                }, 300);
                 $.post("pages/dashboard/footer.jsp"+q, {}, function(data){
                     $("#footer").html(data);
                 });

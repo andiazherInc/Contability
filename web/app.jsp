@@ -93,6 +93,8 @@
                 height: 0;
             }
         }
-       
+        a[href]:after {
+            content: none !important;
+        }
     </style>
 </html>

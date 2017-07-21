@@ -28,6 +28,7 @@ public class App {
     public static String TABLE_NAVBARSTEP = "config_navbarsteps";
     public static String TABLE_ROLE = "config_role";
     public static String TABLE_ROLENAV = "config_rolenavbars";
+    public static String TABLE_MENUS = "config_menu";
     
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){

@@ -19,7 +19,7 @@ import java.sql.Statement;
 public class ConnectionMysql {
     
     private Connection connection;
-    private String host ="localhost";
+    private String host ="192.168.0.12";
     private String port ="3306";
     private String db ="contabilidad";
     private String user ="root";
