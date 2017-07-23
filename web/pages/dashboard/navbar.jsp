@@ -52,6 +52,7 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="menusnavbar">
                         <!-- HERE CODE MENUS -->
+                        <img src="pages/images/loading_spinner.gif" height="15" width="15">
                     </ul>
                       <form class="navbar-form navbar-left" action="search#search" method="get" id="search">
                       <div class="form-group">

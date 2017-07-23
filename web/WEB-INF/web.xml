@@ -20,6 +20,7 @@
         <servlet-name>MenusContent</servlet-name>
         <servlet-class>com.andiazher.contability.controller.parameters.MenusContent</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>

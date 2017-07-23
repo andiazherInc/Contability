@@ -6,27 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String q="";
-    String q2="";
-    String user="";
     try{      
         if(!session.getAttribute("isSession").equals("true")){
             response.sendRedirect("../../login.jsp");
         }
-        else{
-            user = session.getAttribute("user").toString();
-        }
     }
     catch(NullPointerException s){
         response.sendRedirect("../../login.jsp");
-    }
-    try{
-        if(!request.getParameter("q").equals("null")){
-            q = request.getParameter("q");
-            q2 = "?q="+request.getParameter("q");
-        }
-    }catch(NullPointerException s){
-    }
+    }  
 %>
 <html>
     <head>

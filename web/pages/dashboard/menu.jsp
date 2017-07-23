@@ -39,6 +39,7 @@
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Options
             </div>
             <div class="panel-body " style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" id="contentMenu"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
+                <img src="pages/images/loading_spinner.gif" height="15" width="15">
                 Loading menus, please wait .... 
             </div>
             <div class="panel-footer" > <!--style="background-color: black; opacity: 0.9; color: white;"-->
@@ -51,6 +52,7 @@
         function setContendToMenu(html){
             $("#contentMenu").html(html);   
         }
+        
         function loadMenus(){
             $.post("menusContent", {}, function(data){
                 var v = JSON.parse(data);
@@ -60,12 +62,9 @@
                     for(i in v){
                         menu= v[i];
                         if (menu.ispageorurl=="1") {
-                            $("#contentMenu").append("<a href=\"#"+menu.name+"\">"+menu.name+"</a><br>");
+                            $("#contentMenu").append("<a href=\"#"+menu.name+"\" onclick=\"loadContend('"+menu.title+"','"+menu.page+"')\" >"+menu.name+"</a><br>");
                             if(isfirst){
-                                setTitleContend(menu.name);
-                                $.post(""+menu.page, {}, function(data){
-                                    setContendToContend(data);
-                                });
+                                loadContend(menu.title, menu.page);
                                 isfirst=false;
                             }
                         }else{
