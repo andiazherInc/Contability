@@ -35,14 +35,14 @@
     </head>
     <body>
         <div class="panel panel-default contenido" > <!--style="background: transparent;"-->
-                <div class="panel-heading" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> <!--background-color: black; opacity: 0.9; color: white;-->
+                <div class="panel-heading short-text"> <!--background-color: black; opacity: 0.9; color: white;-->
                     <iconandiazher id="iconandiazhercontend"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></iconandiazher> 
                     <titleContend id="titleContend"><img src="pages/images/loading_spinner.gif" height="15" width="15">
-                        Loading title of contend ....</titleContend>
+                        Loading title of content ....</titleContend>
                 </div>
                 <div class="panel-body " id="content"> <!--style="background-color: black; opacity: 0.8; color: white;"-->
                     <img src="pages/images/loading_spinner.gif" height="32" width="32">
-                    Loading contend, please wait ....
+                    Loading content, please wait ....
                 </div>
                 <div class="panel-footer">
                     
@@ -51,7 +51,7 @@
     </body>
     <script type="text/javascript">
         function addLoading(){
-            $("#content").prepend("<div class=\" text-center\" role=\"alert\" style=\" position: fixed; \"><img src=\"pages/images/loading_spinner.gif\" height=\"32\" width=\"32\">  Loading contend, please wait ....</div>");   
+            $("#content").prepend("<div class=\" text-center\" role=\"alert\" style=\" position: fixed; \"><img src=\"pages/images/loading_spinner.gif\" height=\"32\" width=\"32\">  Loading content, please wait ....</div>");   
         }
         function addError(){
             $("#content").prepend("<div class=\"alert alert-danger alert-dismissibl text-center\" role=\"alert\" style=\"  \"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button> Error. NO has pisible loading the content</div>");   

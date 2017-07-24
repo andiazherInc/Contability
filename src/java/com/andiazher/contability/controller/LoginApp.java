@@ -59,7 +59,9 @@ public class LoginApp extends HttpServlet {
                             request.getSession().setAttribute("role", login.getDataOfLabel("role"));
                             request.getSession().setAttribute("color", login.getDataOfLabel("backgroundcolor"));
                             request.getSession().setAttribute("image", login.getDataOfLabel("backgroundcolorimage"));
-                            response.sendRedirect("app.jsp");
+                            String oldSession = request.getSession().getId();
+                            request.changeSessionId();
+                            response.sendRedirect("app.jsp?sessionId="+request.getSession().getId()+"&key="+oldSession);
                         }
                         else{
                             response.sendRedirect("login.jsp?error=Credenciales+invalidas");
@@ -74,6 +76,8 @@ public class LoginApp extends HttpServlet {
             if(param1.equals("logout")){
                 request.getSession().removeAttribute("isSession");
                 response.sendRedirect("login.jsp?logout=true&newKey="+request.changeSessionId());
+                request.getSession().invalidate();
+                
             }
         }
         catch(NullPointerException s){

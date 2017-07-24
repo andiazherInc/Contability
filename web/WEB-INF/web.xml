@@ -20,7 +20,10 @@
         <servlet-name>MenusContent</servlet-name>
         <servlet-class>com.andiazher.contability.controller.parameters.MenusContent</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>DataAccounts</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.accountsData.DataAccounts</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>
@@ -40,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>MenusContent</servlet-name>
         <url-pattern>/menusContent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DataAccounts</servlet-name>
+        <url-pattern>/dataAccounts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

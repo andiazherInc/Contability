@@ -34,11 +34,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="panel panel-default" > <!--style="background: transparent;"-->
+        <div class="panel panel-default" style="height: 100%"> <!--style="background: transparent;"-->
             <div class="panel-heading" > <!--style="background-color: black; opacity: 0.9; color: white;"-->
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Options
             </div>
-            <div class="panel-body " style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" id="contentMenu"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
+            <div class="panel-body short-text" id="contentMenu"> <!-- style="background-color: black; opacity: 0.8; color: white;"-->
                 <img src="pages/images/loading_spinner.gif" height="15" width="15">
                 Loading menus, please wait .... 
             </div>
@@ -58,7 +58,7 @@
                 var v = JSON.parse(data);
                 $("#contentMenu").html("");
                 var isfirst=true;
-                if(v.error!=""){
+                if(v.error!="0"){
                     for(i in v){
                         menu= v[i];
                         if (menu.ispageorurl=="1") {
@@ -74,6 +74,7 @@
                     }
                 }else{
                   $("#contentMenu").append("Error. No loads menus");
+                  loadContend("Error", "pages/dashboard/error.jsp");
                 }
             });
         }

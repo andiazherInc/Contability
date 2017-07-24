@@ -36,10 +36,14 @@
         <link rel="stylesheet" href="pages/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="pages/js/jquery-3.2.1.js"></script>
         <script src="pages/js/jquery-ui.js"></script>
+        <script src="pages/js/chartist.js"></script>
+        <script src="pages/js/chartist.min.js"></script>
         
         <!--<script src="pages/js/jquery.mobile.custom.js"></script> -->
         <script src="pages/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="pages/css/font-awesome.min.css">
+        <link rel="stylesheet" href="pages/css/chartist.css">
+        <link rel="stylesheet" href="pages/css/chartist.min.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
         <title>SCP | andiazher Inc</title>
         
@@ -97,6 +101,11 @@
         }
         a[href]:after {
             content: none !important;
+        }
+        .short-text{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </html>

@@ -30,6 +30,9 @@ public class App {
     public static String TABLE_ROLENAV = "config_rolenavbars";
     public static String TABLE_MENUS = "config_menu";
     
+    //DATA TABLE APP
+    public static String TABLE_ACCOUNTS = "data_accounts";
+    
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){
             connectionMysql.conectar();

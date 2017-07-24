@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.andiazher.contability.controller.parameters;
+package com.andiazher.contability.controller.accountsData;
 
 import com.andiazher.contability.app.App;
 import com.andiazher.contability.controller.JSONA;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author diaan07
  */
-public class MenusContent extends HttpServlet {
+public class DataAccounts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,23 +40,21 @@ public class MenusContent extends HttpServlet {
         try{
             if(App.isSession(request,response)){
                 try{
-                    
-                    JSONA menus= new JSONA();
-                    Entitie menu = new Entitie(App.TABLE_MENUS);
-                    String rolnavid= request.getSession().getAttribute("rolnavid").toString();
-                    ArrayList<Entitie> menuss= menu.getEntitieParam("navbarrole", rolnavid);
-                    for(Entitie m: menuss){
-                        menus.add(m.getId(), m.getJson());
+                    Entitie account= new Entitie(App.TABLE_ACCOUNTS);
+                    JSONA jaccounts = new JSONA();
+                    ArrayList<Entitie> accounts = account.getEntities();
+                    for(Entitie a: accounts){
+                        jaccounts.add(a.getId(), a.getJson());
                     }
                     
                     try (PrintWriter out = response.getWriter()) {
-                        out.println(menus);
-                    }
+                        out.print(jaccounts);
+                    }                     
+                    
                 }catch(NullPointerException s){
-                    s.printStackTrace();
                     try (PrintWriter out = response.getWriter()) {
                         JSONA j= new JSONA();
-                        j.add("error", "0");
+                        j.add("error", "Error: "+s);
                         out.print(j);
                     }                     
                 }
@@ -66,6 +64,8 @@ public class MenusContent extends HttpServlet {
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -80,7 +80,7 @@ public class MenusContent extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MenusContent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccounts.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
