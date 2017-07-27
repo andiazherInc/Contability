@@ -106,7 +106,7 @@
             $.post("navBarContent", {}, function(data){
                 var v = JSON.parse(data);
                 $("#menusnavbar").html("");
-                if(v.error!=""){
+                if(v.error!="0"){
                     for(i in v){
                         menu= v[i];
                         if(menu.isdropdown=="1"){
@@ -142,7 +142,8 @@
                     }
                 }
                 else{
-                  $("#menusnavbar").append("Error. No loads menus");
+                  $("#contentMenu").append("Error. No loads menus");
+                  loadContend("Error", "pages/dashboard/error.jsp");
                 }
             });
         }

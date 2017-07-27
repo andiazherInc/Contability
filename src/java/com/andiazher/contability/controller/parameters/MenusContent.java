@@ -53,7 +53,6 @@ public class MenusContent extends HttpServlet {
                         out.println(menus);
                     }
                 }catch(NullPointerException s){
-                    s.printStackTrace();
                     try (PrintWriter out = response.getWriter()) {
                         JSONA j= new JSONA();
                         j.add("error", "0");

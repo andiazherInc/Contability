@@ -20,10 +20,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LISTA DE CUENTAS</title>    
+        <title>DASHBOARD: ESTADO DE CUENTAS</title>    
     </head>
     
     <body>        
+        <h3 class="text-center">ESTADO DE CUENTAS</h3>
         <div class="col-md-6">
             <div class=" panel panel-success">
                 <div class="panel-body">

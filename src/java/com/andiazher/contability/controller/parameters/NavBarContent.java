@@ -99,7 +99,7 @@ public class NavBarContent extends HttpServlet {
                 }catch(NullPointerException s){
                     try (PrintWriter out = response.getWriter()) {
                         JSONA j= new JSONA();
-                        j.add("error", "Error: "+s);
+                        j.add("error", "0");
                         out.print(j);
                     }                     
                 }
