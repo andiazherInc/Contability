@@ -4,13 +4,16 @@
     Author     : andre
 --%>
 
+<%@page import="com.andiazher.contability.app.App"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String q="";
     String q2="";
     String user="";
+    String sessionId="";
+    String key="";
     try{      
-        if(!session.getAttribute("isSession").equals("true")){
+        if(!App.isSession(request,response)){
             response.sendRedirect("../../login.jsp");
         }
         else{
@@ -21,10 +24,8 @@
         response.sendRedirect("../../login.jsp");
     }
     try{
-        if(!request.getParameter("q").equals("null")){
-            q = request.getParameter("q");
-            q2 = "?q="+request.getParameter("q");
-        }
+        sessionId = request.getParameter("sessionId");
+        key= request.getParameter("key");
     }catch(NullPointerException s){
     }
 %>
@@ -54,7 +55,7 @@
             $("#content").prepend("<div class=\" text-center\" role=\"alert\" style=\" position: fixed; \"><img src=\"pages/images/loading_spinner.gif\" height=\"32\" width=\"32\">  Loading content, please wait ....</div>");   
         }
         function addError(){
-            $("#content").prepend("<div class=\"alert alert-danger alert-dismissibl text-center\" role=\"alert\" style=\"  \"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button> Error. NO has pisible loading the content</div>");   
+            $("#content").prepend("<div class=\"alert alert-danger alert-dismissibl text-center\" role=\"alert\" style=\"  \"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button> Error. No es posible cargar el contenido</div>");   
         }
         function setTitleContend(title){
             $("#titleContend").html(title);
@@ -67,7 +68,9 @@
             $("#iconandiazhercontend").html("");
             setTitleContend("<img src=\"pages/images/loading_spinner.gif\" height=\"15\" width=\"15\"> "+titleName);
             try{
-                $.post(""+url, {}, function(data){
+                var s1= "<%=sessionId%>";
+                var s2= "<%=key%>";
+                $.post(""+url, {sessionId: s1, key:s2}, function(data){
                     setTitleContend(titleName);
                     $("#iconandiazhercontend").html("<span class=\"glyphicon glyphicon-th\" aria-hidden=\"true\"></span>");
                     setContendToContend(data);

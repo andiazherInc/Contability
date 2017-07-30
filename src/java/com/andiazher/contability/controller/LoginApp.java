@@ -61,10 +61,12 @@ public class LoginApp extends HttpServlet {
                             request.getSession().setAttribute("image", login.getDataOfLabel("backgroundcolorimage"));
                             String oldSession = request.getSession().getId();
                             request.changeSessionId();
-                            response.sendRedirect("app.jsp?sessionId="+request.getSession().getId()+"&key="+oldSession);
+                            request.getSession().setAttribute("key", oldSession);
+                            response.sendRedirect("app?sessionId="+request.getSession().getId()+"&key="+oldSession);
                         }
                         else{
                             response.sendRedirect("login.jsp?error=Credenciales+invalidas");
+                            request.getSession().invalidate();
                         }
                     }catch(IndexOutOfBoundsException s){
                         response.sendRedirect("login.jsp?error=Credenciales+invalidas");

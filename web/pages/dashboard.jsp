@@ -4,13 +4,16 @@
     Author     : andre
 --%>
 
+<%@page import="com.andiazher.contability.app.App"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String q="";
     String q2="";
     String user="";
+    String sessionId="";
+    String key="";
     try{      
-        if(!session.getAttribute("isSession").equals("true")){
+        if(!App.isSession(request,response)){
             response.sendRedirect("../login.jsp");
         }
         else{
@@ -27,6 +30,11 @@
         }
     }catch(NullPointerException s){
     }
+    try{
+        sessionId = request.getParameter("sessionId");
+        key= request.getParameter("key");
+    }
+    catch(NullPointerException s){}
 %>
 <!DOCTYPE html>
 <html>
@@ -61,27 +69,35 @@
             }
             else{
                 var q= "<%=q2%>";
-                $.post("pages/dashboard/navbar.jsp"+q, {}, function(data){
+                var s1= "<%=sessionId%>";
+                var s2= "<%=key%>";
+                $.post("pages/dashboard/navbar.jsp"+q, {sessionId: s1, key:s2}, function(data){
                     $("#navbar").html(data);
                 });
-                
-                setTimeout(function() {
-                    $( function() {
-                        $.post("pages/dashboard/menu.jsp"+q, {}, function(data){
-                            $("#menu").html(data);
-                        });
-                    } );    
-                }, 200);
-                setTimeout(function() {
-                    $( function() {
-                        $.post("pages/dashboard/contend.jsp"+q, {}, function(data){
-                            $("#contenido").html(data);
-                        });
-                    } );    
-                }, 300);
-                $.post("pages/dashboard/footer.jsp"+q, {}, function(data){
+                $( function() {
+                    $.post("pages/dashboard/menu.jsp"+q, {sessionId: s1, key:s2}, function(data){
+                        $("#menu").html(data);
+                    });
+                } );
+                $( function() {
+                    $.post("pages/dashboard/contend.jsp"+q, {sessionId: s1, key:s2}, function(data){
+                        $("#contenido").html(data);
+                    });
+                } );
+                $.post("pages/dashboard/footer.jsp"+q, {sessionId: s1, key:s2}, function(data){
                     $("#footer").html(data);
                 });
+            }
+        }
+        function loadTwo(){
+            var idSession= "<%=session.getAttribute("isSession")%>";
+            if(idSession=="" || idSession =="null" || idSession==undefined){
+                $.post("login.jsp", {}, function(data){
+                    $("#contend").html(data);
+                });
+            }
+            else{
+                loadMenus();
             }
         }
         function search(data){

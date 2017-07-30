@@ -9,7 +9,7 @@
     String name="";
     try{      
         if(session.getAttribute("isSession").equals("true")){
-            response.sendRedirect("app.jsp");
+            //response.sendRedirect("app");
         }
     }
     catch(NullPointerException s){ 
@@ -52,7 +52,7 @@
                 </div>
                 <div class="panel-body ">
                     <p class="text-center text-danger" id="error" style="text-shadow: 2px 2px 2px black; color: white;"><%=name%></p>
-                    <form action="loginApp#login=true&key=<%=session.getId()%>" id="loginForm" method="post">
+                    <form action="loginApp?action=execute&login=true#id=266HSH26A72B126ZHASV2GMLOIU312HG12" id="loginForm" method="post">
                         <input type="hidden" value="login" name="param">
                         <div class="form-group">
                             <!--<label for="exampleInputEmail1">Username</label>-->
@@ -61,6 +61,7 @@
                         <div class="form-group">
                             <!--<label for="exampleInputPassword1">Password</label>-->
                             <input type="password" class="form-control" id="exampleInputPassword1" name="pass" placeholder="Password" required>
+                            <input type="hidden" name="key" value="<%=session.getId()%>">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn  btn-block" onclick="validate()">Access</button>

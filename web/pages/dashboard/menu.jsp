@@ -4,13 +4,16 @@
     Author     : andre
 --%>
 
+<%@page import="com.andiazher.contability.app.App"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String q="";
     String q2="";
     String user="";
+    String sessionId="";
+    String key="";
     try{      
-        if(!session.getAttribute("isSession").equals("true")){
+        if(!App.isSession(request,response)){
             response.sendRedirect("../../login.jsp");
         }
         else{
@@ -27,6 +30,11 @@
         }
     }catch(NullPointerException s){
     }
+    try{
+        sessionId = request.getParameter("sessionId");
+        key= request.getParameter("key");
+    }
+    catch(NullPointerException s){}
 %>
 <html>
     <head>
@@ -54,27 +62,34 @@
         }
         
         function loadMenus(){
-            $.post("menusContent", {}, function(data){
+            var s1= "<%=sessionId%>";
+            var s2= "<%=key%>";
+            $.post("menusContent", {sessionId: s1, key:s2}, function(data){
                 var v = JSON.parse(data);
                 $("#contentMenu").html("");
                 var isfirst=true;
-                if(v.error!="0"){
-                    for(i in v){
-                        menu= v[i];
-                        if (menu.ispageorurl=="1") {
-                            $("#contentMenu").append("<a href=\"#"+menu.name+"\" onclick=\"loadContend('"+menu.title+"','"+menu.page+"')\" >"+menu.name+"</a><br>");
-                            if(isfirst){
-                                loadContend(menu.title, menu.page);
-                                isfirst=false;
+                if(v.error!="0" ){
+                    if(v.error=="empty"){
+                        $("#contentMenu").append("List of menus is empty");
+                        loadContend("Error", "pages/dashboard/error.jsp");
+                    }else{
+                        for(i in v){
+                            menu= v[i];
+                            if (menu.ispageorurl=="1") {
+                                $("#contentMenu").append("<a href=\"#"+menu.name+"\" onclick=\"loadContend('"+menu.title+"','"+menu.page+"')\" >"+menu.name+"</a><br>");
+                                if(isfirst){
+                                    loadContend(menu.title, menu.page);
+                                    isfirst=false;
+                                }
+                            }else{
+                                $("#contentMenu").append("<a href=\""+menu.page+"\" target=\"_blank\">"+menu.name+"<a><br>");
                             }
-                        }else{
-                            $("#contentMenu").append("<a href=\""+menu.page+"\" target=\"_blank\">"+menu.name+"<a><br>");
                         }
-                        
                     }
-                }else{
-                  $("#contentMenu").append("Error. No loads menus");
-                  loadContend("Error", "pages/dashboard/error.jsp");
+                }
+                else{
+                    $("#contentMenu").append("Error. No loads menus");
+                    loadContend("Error", "pages/dashboard/error.jsp");
                 }
             });
         }

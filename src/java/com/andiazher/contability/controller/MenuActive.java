@@ -3,17 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.andiazher.contability.controller.parameters;
+package com.andiazher.contability.controller;
 
 import com.andiazher.contability.app.App;
-import com.andiazher.contability.controller.JSONA;
-import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author diaan07
  */
-public class MenusContent extends HttpServlet {
+public class MenuActive extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,28 +29,12 @@ public class MenusContent extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
         try{
-            if(App.isSession(request,response)){
+            if(App.isSession(request, response)){
                 try{
-                    
-                    JSONA menus= new JSONA();
-                    Entitie menu = new Entitie(App.TABLE_MENUS);
-                    String rolnavid= request.getSession().getAttribute("rolnavid").toString();
-                    ArrayList<Entitie> menuss= menu.getEntitieParam("navbarrole", rolnavid);
-                    int contador=0;
-                    for(Entitie m: menuss){
-                        contador++;
-                        menus.add(m.getId(), m.getJson());
-                    }
-                    if(contador==0){
-                        menus.add("error", "empty");
-                    }
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(menus);
-                    }
-                    
+                    String id =request.getParameter("navbar");
+                    request.getSession().setAttribute("rolnavid", id);
                 }catch(NullPointerException s){
                     try (PrintWriter out = response.getWriter()) {
                         JSONA j= new JSONA();
@@ -66,7 +44,7 @@ public class MenusContent extends HttpServlet {
                 }
             }
         }catch(NullPointerException s){
-            response.sendRedirect("login.jsp?error=Credenciales+invalidas");
+            
         }
     }
 
@@ -81,11 +59,7 @@ public class MenusContent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenusContent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

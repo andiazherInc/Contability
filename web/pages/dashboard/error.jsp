@@ -12,8 +12,10 @@
         <title>Error Page</title>
     </head>
     <body>
-        <h3>Error: </h3>
-        <p>Ha ocurrido un error mientras se cargaba el contenido, si el error persiste, por favor cominicarse con el administrador.</p>
+        <div class="alert alert-danger" role="alert">
+            <h3><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Error: </h3>
+            <p>Ha ocurrido un error mientras se cargaba el contenido, si el error persiste, por favor cominicarse con el administrador.</p>
+        </div>
         <p><a onclick="reloadAll()" href="#realod">Reload here</a></p>
         <p><a onclick="logout()" href="#logout">Cambiar de usuario</a></p>
     </body>

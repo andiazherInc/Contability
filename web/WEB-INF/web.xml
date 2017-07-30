@@ -24,6 +24,14 @@
         <servlet-name>DataAccounts</servlet-name>
         <servlet-class>com.andiazher.contability.controller.accountsData.DataAccounts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AppRoot</servlet-name>
+        <servlet-class>com.andiazher.contability.app.AppRoot</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MenuActive</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.MenuActive</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>DataAccounts</servlet-name>
         <url-pattern>/dataAccounts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppRoot</servlet-name>
+        <url-pattern>/app</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuActive</servlet-name>
+        <url-pattern>/menuActive</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

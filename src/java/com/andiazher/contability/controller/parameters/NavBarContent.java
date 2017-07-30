@@ -51,7 +51,15 @@ public class NavBarContent extends HttpServlet {
                     Entitie rolenav = new Entitie(App.TABLE_ROLENAV);
                     ArrayList<Entitie> regiters = rolenav.getEntitieParam("role", request.getSession().getAttribute("role").toString());                    
                     role.getEntitieId(request.getSession().getAttribute("role").toString());
-                    String na= role.getDataOfLabel("defaultnav").toString();
+                    String na;
+                    try{
+                        na=request.getSession().getAttribute("rolnavid").toString();
+                        if(na.isEmpty()){
+                            na= role.getDataOfLabel("defaultnav").toString();
+                        }
+                    }catch(NullPointerException s){
+                        na= role.getDataOfLabel("defaultnav").toString();
+                    }
                     boolean existMnu=false;
                     for(Entitie r: regiters){    
                         String idnavbar= r.getDataOfLabel("navbar").toString();
@@ -59,7 +67,9 @@ public class NavBarContent extends HttpServlet {
                         if(navbars.getValue(idnavbar)==null){
                             navbar = new Entitie(App.TABLE_NAVBAR);
                             navbar.getEntitieId(idnavbar);
-                            navbars.add(navbar.getId(), navbar.getJson());
+                            JSONA temp2= navbar.getJson();
+                            temp2.add("rolnavbid", r.getId());
+                            navbars.add(navbar.getId(), temp2);
                             //AD PROPERTY ACTIVE CLASS TO MENU
                             if(na.equals(r.getId())){
                                 JSONA temp = (JSONA) navbars.getValue(idnavbar);

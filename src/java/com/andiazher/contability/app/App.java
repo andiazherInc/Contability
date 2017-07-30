@@ -66,10 +66,21 @@ public class App {
     public static boolean isSession(HttpServletRequest request, HttpServletResponse response) throws IOException{
         try{
             if(request.getSession().getAttribute("isSession").equals("true")){
-                return  true;
+                String idSession=request.getParameter("sessionId");
+                String key=request.getParameter("key");
+                if(idSession.equals(request.getSession().getId()) && key.equals(request.getSession().getAttribute("key"))){
+                    return  true;
+                }else{
+                    request.getSession().removeAttribute("isSession");
+                    request.getSession().invalidate();
+                    response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
+                    return  false;
+                }
             }
             else{
+                request.getSession().invalidate();
                 response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
+                return  false;
             }
         }catch(NullPointerException s){
             response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());

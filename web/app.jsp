@@ -9,6 +9,8 @@
     String q="";
     String color="";
     String image="";
+    String sessionId="";
+    String key="";
     try{
         if(!request.getParameter("q").equals("null")){
             q = "?q="+request.getParameter("q");
@@ -20,6 +22,12 @@
         image= session.getAttribute("image").toString();
     }
     catch(NullPointerException s){}
+    try{
+        sessionId = request.getParameter("sessionId");
+        key= request.getParameter("key");
+    }
+    catch(NullPointerException s){}
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -45,6 +53,9 @@
         <link rel="stylesheet" href="pages/css/chartist.css">
         <link rel="stylesheet" href="pages/css/chartist.min.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+        <!--
+        <script type="text/javascript" id="ca_eum_ba" agent=browser src="https://cloud.ca.com/mdo/v1/sdks/browser/BA.js" data-profileUrl="https://collector-axa.cloud.ca.com/api/1/urn:ca:tenantId:6D9A82C5-B1BA-4E10-94B1-61357FE88E67/urn:ca:appId:Demo%20App/profile?agent=browser" data-tenantID="6D9A82C5-B1BA-4E10-94B1-61357FE88E67" data-appID="Demo App" data-appKey="776928e0-4f83-11e7-8056-b9dcd6578ee6" ></script>
+        -->
         <title>SCP | andiazher Inc</title>
         
     </head>
@@ -65,7 +76,9 @@
             }
             else{
                 var q= "<%=q%>";
-                $.post("pages/dashboard.jsp"+q, {}, function(data){
+                var s1= "<%=sessionId%>";
+                var s2= "<%=key%>";
+                $.post("pages/dashboard.jsp"+q, {sessionId: s1, key:s2}, function(data){
                     $("#contend").html(data);
                 });
             }

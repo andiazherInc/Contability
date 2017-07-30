@@ -4,16 +4,24 @@
     Author     : diaan07
 --%>
 
+<%@page import="com.andiazher.contability.app.App"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String sessionId="";
+    String key="";
     try{      
-        if(!session.getAttribute("isSession").equals("true")){
+        if(!App.isSession(request, response)){
             response.sendRedirect("../../login.jsp");
         }
     }
     catch(NullPointerException s){
         response.sendRedirect("../../login.jsp");
     }  
+    try{
+        sessionId = request.getParameter("sessionId");
+        key= request.getParameter("key");
+    }
+    catch(NullPointerException s){}
 %>
 
 <!DOCTYPE html>
@@ -47,7 +55,15 @@
                     <!--HERE DATA ACCOUNTS -->
                 </tbody>
             </table>
-        </div>    
+        </div>
+        <div class="col-md-6">
+            <div class=" panel panel-success">
+                <div class="panel-body">
+                    <div class="ct-chart2 ct-perfect-fourth"></div>
+                </div>
+                <div class="panel-footer"><small>Saldo de cuentas</small></div>
+            </div>
+        </div>
     </body>    
     <script>
         var data = {
@@ -64,8 +80,24 @@
           new Chartist.Line('.ct-chart', data);
     </script>
     <script>
+        var data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              series: [
+              [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+              [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+            ]
+          };
+
+          // Create a new line chart object where as first parameter we pass in a selector
+          // that is resolving to our chart container element. The Second parameter
+          // is the actual data object.
+          new Chartist.Line('.ct-chart2', data);
+    </script>
+    <script>
         function loadAccounts(){
-            $.post("dataAccounts", {}, function(data){
+            var s1= "<%=sessionId%>";
+            var s2= "<%=key%>";
+            $.post("dataAccounts", {sessionId: s1, key:s2}, function(data){
                 var v = JSON.parse(data);
                 $("#tableBody").html("");
                 var isfirst=true;
