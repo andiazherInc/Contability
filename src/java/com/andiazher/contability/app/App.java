@@ -32,6 +32,7 @@ public class App {
     
     //DATA TABLE APP
     public static String TABLE_ACCOUNTS = "data_accounts";
+    public static String TABLE_MOVIMIENTS = "data_movimientos";
     
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){
@@ -84,6 +85,8 @@ public class App {
             }
         }catch(NullPointerException s){
             response.sendRedirect("login.jsp?error=THE SESSION IS NO VALIDE. ID="+request.getSession().getId());
+        }catch(IllegalStateException s){
+            System.out.println("Error here "+s);
         }
         return false;
     }

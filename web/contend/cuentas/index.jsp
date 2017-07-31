@@ -104,7 +104,11 @@
                 if(v.error!=""){
                     for(i in v){
                         row= v[i];
-                        $("#tableBody").append(" <tr><td class=\"text-center\">"+row.number+"</td><td style=\"table-layout:fixed;\">"+row.name+"</td><td class=\"text-right\">$0</td></tr>");
+                        $("#tableBody").append(" <tr>\n\
+                            <td class=\"text-center\"><a href=\"#openAccount("+row.number+")\" onclick=\"loadContend('Movimientos de la cuenta <b>"+row.number+" - "+row.name+"</b>','contend/cuentas/edit.jsp?id="+row.id+"');\">"+row.number+"</a></td>\n\
+                            <td style=\"table-layout:fixed;\">"+row.name+"</td>\n\
+                            <td class=\"text-right\">$0</td>\n\
+                            </tr>");
                     }
                 }else{
                   $("#tableBody").append("Error. No loads data accounts, please comunicate with administrator");

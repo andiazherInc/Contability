@@ -19,8 +19,9 @@
         else{
             user = session.getAttribute("user").toString();
         }
-    }
-    catch(NullPointerException s){
+    }catch(NullPointerException s){
+        response.sendRedirect("../login.jsp");
+    }catch(IllegalStateException s){
         response.sendRedirect("../login.jsp");
     }
     try{
@@ -33,8 +34,10 @@
     try{
         sessionId = request.getParameter("sessionId");
         key= request.getParameter("key");
+    }catch(NullPointerException s){}
+    catch(IllegalStateException s){
+        System.out.println("Error Here 2 "+s);
     }
-    catch(NullPointerException s){}
 %>
 <!DOCTYPE html>
 <html>

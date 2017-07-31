@@ -27,7 +27,6 @@
         key= request.getParameter("key");
     }
     catch(NullPointerException s){}
-    
 %>
 <!DOCTYPE html>
 <html>
