@@ -21,14 +21,8 @@
         <title>FOOTER</title>
     </head>
     <body>
-        <div style="text-shadow: 0px 0px 0px black;" class="panel panel-info">
-            <div class="panel-heading text-right  ">
-                <!--Software Accounting - Team andiazher Software - V1.0 no-print-->
-            </div>
-            
-            <div class="panel-footer text-right small" id="copyright">
-                by <a href="http://andiazher.com/about?ref=Software+Accounting&V=1.0">andiazher Inc</a> &copy;   
-            </div>
+        <div style="text-shadow: 0px 0px 0px black;" class="text-right small "  id="copyright" >
+            by <a href="http://andiazher.com/about?ref=Software+Accounting&V=1.0">andiazher Inc</a> &copy;   
         </div>
         
         

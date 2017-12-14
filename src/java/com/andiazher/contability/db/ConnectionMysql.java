@@ -19,9 +19,9 @@ import java.sql.Statement;
 public class ConnectionMysql {
     
     private Connection connection;
-    private String host ="192.168.0.12"; //192.168.0.12
+    private String host ="localhost"; //192.168.0.12
     private String port ="3306";
-    private String db ="contabilidad";
+    private String db ="monedas";
     private String user ="root"; //root or admin
     private String pass =""; //-- or root
     private String informationSchema="information_schema";

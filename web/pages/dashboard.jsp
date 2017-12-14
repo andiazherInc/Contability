@@ -56,7 +56,7 @@
         <div class="col-sm-10" id="contenido">
             
         </div>
-        <div class="col-sm-12" id="footer">
+        <div class="col-sm-12 footerDashboard" id="footer">
             
         </div>
         </div>
@@ -121,6 +121,14 @@
         load(<%=session.getAttribute("isSession")%>);
         
     </script>
+    <style>
+        .footerDashboard {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background: white;
+          }
+    </style>
     <style>
         @media print
         {
