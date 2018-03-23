@@ -31,7 +31,11 @@
     </head>
     <body>
         <div>
-            <h3 id="nameaccount">CUENTA <b>NOMBRE DE CUENTA</b></h3>
+            <h3 id="nameaccount">CUENTA: <b>--</b></h3>
+            
         </div>
     </body>
+    <script>
+        
+    </script>
 </html>

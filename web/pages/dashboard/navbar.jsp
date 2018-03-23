@@ -128,6 +128,7 @@
                 if(v.error!="0"){
                     for(i in v){
                         menu= v[i];
+                        
                         if(menu.isdropdown=="1"){
                           var ls="";
                           ls+= "<li class=\"dropdown "+menu.active+" \" id=\"navid"+menu.id+"\" ><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">"+menu.name+"<span class=\"caret\"></span></a>";  

@@ -32,6 +32,14 @@
         <servlet-name>MenuActive</servlet-name>
         <servlet-class>com.andiazher.contability.controller.MenuActive</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DataMonedas</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.accountsData.DataMonedas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMonedas</servlet-name>
+        <servlet-class>com.andiazher.contability.controller.accountsData.AddMonedas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginApp</servlet-name>
         <url-pattern>/loginApp</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>MenuActive</servlet-name>
         <url-pattern>/menuActive</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DataMonedas</servlet-name>
+        <url-pattern>/dataMonedas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMonedas</servlet-name>
+        <url-pattern>/addMonedas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

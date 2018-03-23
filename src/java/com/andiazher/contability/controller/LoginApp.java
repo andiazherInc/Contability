@@ -8,6 +8,7 @@ package com.andiazher.contability.controller;
 import com.andiazher.contability.app.App;
 import com.andiazher.contability.entitie.Entitie;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -56,6 +57,7 @@ public class LoginApp extends HttpServlet {
                             System.out.println("The user "+user+" has login at "+ f);
                             request.getSession().setAttribute("isSession", "true");
                             request.getSession().setAttribute("user", user);
+                            request.getSession().setAttribute("userid", login.getId());
                             request.getSession().setAttribute("role", login.getDataOfLabel("role"));
                             request.getSession().setAttribute("color", login.getDataOfLabel("backgroundcolor"));
                             request.getSession().setAttribute("image", login.getDataOfLabel("backgroundcolorimage"));
@@ -80,6 +82,13 @@ public class LoginApp extends HttpServlet {
                 response.sendRedirect("login.jsp?logout=true&newKey="+request.changeSessionId());
                 request.getSession().invalidate();
                 
+            }
+            if(param1.equals("isSession")){
+                try (PrintWriter out = response.getWriter()) {
+                    JSONA j= new JSONA();
+                    j.add("isSession",(String) request.getSession().getAttribute("isSession")+"");
+                    out.print(j);
+                }                     
             }
         }
         catch(NullPointerException s){

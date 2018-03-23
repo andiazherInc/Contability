@@ -33,6 +33,7 @@ public class App {
     //DATA TABLE APP
     public static String TABLE_ACCOUNTS = "data_accounts";
     public static String TABLE_MOVIMIENTS = "data_movimientos";
+    public static String TABLE_MONEDAS = "data_monedas";
     
     public static ResultSet consult(String sql) throws SQLException{
         if(connectionMysql.getConnection()==null){

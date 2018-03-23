@@ -43,19 +43,24 @@ public class JSONA {
     @Override
     public String toString() {
         String s = "{";
-        String k = "";
-        for(Map.Entry<String, Object> j: object.entrySet()){
-            s+=k;
-            if(j.getValue().getClass().equals(JSONA.class)){
-                s+=" \""+j.getKey()+"\""+" :\n"+"  "+j.getValue()+"   ";
+        try{
+            String k = "";
+            for(Map.Entry<String, Object> j: object.entrySet()){
+                s+=k;
+                if(j.getValue().getClass().equals(JSONA.class)){
+                    s+=" \""+j.getKey()+"\""+" :\n"+"  "+j.getValue()+"   ";
+                }
+                else{
+                    s+=" \""+j.getKey()+"\""+":"+"\""+j.getValue()+"\"  ";
+                }
+                k=", \n";
             }
-            else{
-                s+=" \""+j.getKey()+"\""+":"+"\""+j.getValue()+"\"  ";
-            }
-            k=", \n";
+        }catch(NullPointerException k){
+            System.err.println("Algunos de los objetos son nulos.");
+            k.printStackTrace();
         }
         s+="}";
         return s;
     }
-    
+
 }

@@ -357,4 +357,24 @@ public final class Entitie{
         return null;
     }
 
+    public ArrayList<Entitie> getEntitieParam(String param, String param2, String param3) throws SQLException {
+        String sql = "";
+        String params = "";
+        params+=param+"='"+param2+"'";
+        sql+="SELECT * FROM "+App.getConnectionMysql().getDb()+"."+ name +" where "+params+" order by "+param3;
+        ResultSet query= App.consult(sql);
+        ArrayList<Entitie> entities= new ArrayList<>();
+        
+        while(query.next()){
+            Entitie entitie = new Entitie(name);
+            entitie.setId(query.getString("id"));
+            for(Map.Entry<String, Object> j: data.entrySet()){
+                entitie.getDataMap().put( j.getKey(), query.getString( j.getKey() ));
+            }
+            entitie.getDataMap().put( "id",  entitie.getId() );
+            entities.add(entitie);
+        }
+        return entities;
+    }
+
 }

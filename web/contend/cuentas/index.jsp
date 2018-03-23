@@ -16,12 +16,14 @@
     }
     catch(NullPointerException s){
         response.sendRedirect("../../login.jsp");
-    }  
+    }
+    catch(IllegalStateException s){}
     try{
         sessionId = request.getParameter("sessionId");
         key= request.getParameter("key");
     }
     catch(NullPointerException s){}
+    catch(IllegalStateException s){}
 %>
 
 <!DOCTYPE html>

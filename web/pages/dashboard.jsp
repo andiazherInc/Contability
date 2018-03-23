@@ -21,9 +21,7 @@
         }
     }catch(NullPointerException s){
         response.sendRedirect("../login.jsp");
-    }catch(IllegalStateException s){
-        response.sendRedirect("../login.jsp");
-    }
+    }catch(IllegalStateException s){ System.out.println("Error");}
     try{
         if(!request.getParameter("q").equals("null")){
             q = request.getParameter("q");
@@ -35,8 +33,7 @@
         sessionId = request.getParameter("sessionId");
         key= request.getParameter("key");
     }catch(NullPointerException s){}
-    catch(IllegalStateException s){
-        System.out.println("Error Here 2 "+s);
+    catch(IllegalStateException s){System.out.println("Error2");
     }
 %>
 <!DOCTYPE html>
@@ -93,15 +90,20 @@
             }
         }
         function loadTwo(){
-            var idSession= "<%=session.getAttribute("isSession")%>";
-            if(idSession=="" || idSession =="null" || idSession==undefined){
-                $.post("login.jsp", {}, function(data){
-                    $("#contend").html(data);
-                });
-            }
-            else{
-                loadMenus();
-            }
+            var isSession="isSession";
+            $.post("loginApp",{param:isSession}, function(data){
+                var v = JSON.parse(data);
+                var idSession = v.isSession;
+                if(idSession=="" || idSession =="null" || idSession==undefined){
+                    $.post("login.jsp", {}, function(data){
+                        $("#contend").html(data);
+                    });
+                }
+                else{
+                    loadMenus();
+                }
+            });
+            
         }
         function search(data){
             try{

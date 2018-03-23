@@ -22,6 +22,7 @@
         image= session.getAttribute("image").toString();
     }
     catch(NullPointerException s){}
+    catch(IllegalStateException s){}
     try{
         sessionId = request.getParameter("sessionId");
         key= request.getParameter("key");
