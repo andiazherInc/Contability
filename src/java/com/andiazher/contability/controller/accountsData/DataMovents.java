@@ -21,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author diaan07
+ * @author andre
  */
-public class DataAccounts extends HttpServlet {
+public class DataMovents extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,46 +38,36 @@ public class DataAccounts extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            if(App.isSession(request,response)){
-                try{
-                    Entitie account= new Entitie(App.TABLE_ACCOUNTS);
-                    Entitie movement = new Entitie(App.TABLE_MOVIMIENTS);
-                    JSONA jaccounts = new JSONA();
-                    ArrayList<Entitie> accounts = account.getEntities();
-                    for(Entitie a: accounts){
-                        ArrayList<Entitie> movementsA = movement.getEntitieParam("account", a.getId());
-                        int saldo=0;
-                        for(Entitie j: movementsA){
-                            if(j.getDataOfLabel("type").equals("+")){
-                                saldo+=Integer.parseInt((String) j.getDataOfLabel("value"));
-                            }
-                            else{
-                                saldo-=Integer.parseInt((String) j.getDataOfLabel("value"));
-                            }
-                        }
-                        JSONA tempt= a.getJson();
-                        tempt.add("saldo", saldo+"");
-                        jaccounts.add(a.getId(), tempt);
+           if(App.isSession(request,response)){
+               try{
+                   String param1 = request.getParameter("id");
+                   Entitie movement= new Entitie(App.TABLE_MOVIMIENTS);
+                   Entitie account = new Entitie(App.TABLE_ACCOUNTS);
+                   account.getEntitieId(param1);
+                   JSONA jmovements = new JSONA();
+                   JSONA jmovements2 = new JSONA();
+                    ArrayList<Entitie> movements = movement.getEntitieParam("account", param1);
+                    for(Entitie a: movements){
+                        jmovements.add(a.getId(), a.getJson());
+                    }
+                    jmovements2.add("movements", jmovements);
+                    jmovements2.add("name", " ["+account.getDataOfLabel("number")+"] "+account.getDataOfLabel("name") );
+                    try (PrintWriter out = response.getWriter()) {
+                        out.print(jmovements2);
                     }
                     
-                    try (PrintWriter out = response.getWriter()) {
-                        out.print(jaccounts);
-                    }                     
-                    
-                }catch(NullPointerException s){
-                    try (PrintWriter out = response.getWriter()) {
+               }catch(NullPointerException s){
+                   try (PrintWriter out = response.getWriter()) {
                         JSONA j= new JSONA();
                         j.add("error", "Error: "+s);
                         out.print(j);
-                    }                     
-                }
-            }
-        }catch(NullPointerException s){
+                    }  
+               }
+           } 
+        } catch(NullPointerException s){
             response.sendRedirect("login.jsp?error=Credenciales+invalidas");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -93,7 +83,7 @@ public class DataAccounts extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccounts.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataMovents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

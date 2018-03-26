@@ -58,11 +58,15 @@
                 if(v.error!=""){
                     for(i in v){
                         row= v[i];
+                        var valorsaldohtml="<td class=\"text-right\"> $ "+Intl.NumberFormat().format(row.saldo)+"</td>";
+                        if(row.saldo<0){
+                            valorsaldohtml="<td class=\"text-right\" style=\"color:red;\"> $ "+Intl.NumberFormat().format(row.saldo)+"</td>";
+                        }
                         $("#tableBody").append(" <tr>\n\
                             <td class=\"text-center\"><a href=\"#openAccount("+row.number+")\" onclick=\"loadContend('Movimientos de la cuenta <b>"+row.number+" - "+row.name+"</b> ','contend/cuentas/edit.jsp?id="+row.id+"');\">"+row.number+"</a></td>\n\
                             <td style=\"table-layout:fixed;\">"+row.name+"</td>\n\
                             <td style=\"table-layout:fixed;\">"+row.owner+"</td>\n\
-                            <td class=\"text-right\">$0</td></tr>");
+                            "+valorsaldohtml);
                     }
                 }else{
                   $("#tableBody").append("Error. No loads data accounts, please comunicate with administrator");
